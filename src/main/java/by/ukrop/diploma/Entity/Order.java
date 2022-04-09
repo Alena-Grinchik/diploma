@@ -1,5 +1,7 @@
 package by.ukrop.diploma.Entity;
 
+import by.ukrop.diploma.PaymentMethod;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,17 +12,17 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column
     private Long id;
 
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "status")
+    @Column
     private String status;
 
-    @Column(name = "date")
+    @Column
     private LocalDate date;
 
     @ManyToOne
@@ -29,6 +31,9 @@ public class Order {
 
     @Column(name = "order_notes")
     private String orderNotes;
+
+    @Enumerated
+    private PaymentMethod paymentMethod;
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItemsList;
@@ -76,14 +81,6 @@ public class Order {
         this.address = address;
     }
 
-    public List<OrderItem> getOrderItemsList() {
-        return orderItemsList;
-    }
-
-    public void setOrderItemsList(List<OrderItem> orderItemsList) {
-        this.orderItemsList = orderItemsList;
-    }
-
     public String getOrderNotes() {
         return orderNotes;
     }
@@ -92,16 +89,32 @@ public class Order {
         this.orderNotes = orderNotes;
     }
 
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public List<OrderItem> getOrderItemsList() {
+        return orderItemsList;
+    }
+
+    public void setOrderItemsList(List<OrderItem> orderItemsList) {
+        this.orderItemsList = orderItemsList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(user, order.user) && Objects.equals(status, order.status) && Objects.equals(date, order.date) && Objects.equals(address, order.address) && Objects.equals(orderNotes, order.orderNotes) && Objects.equals(orderItemsList, order.orderItemsList);
+        return Objects.equals(id, order.id) && Objects.equals(user, order.user) && Objects.equals(status, order.status) && Objects.equals(date, order.date) && Objects.equals(address, order.address) && Objects.equals(orderNotes, order.orderNotes) && paymentMethod == order.paymentMethod && Objects.equals(orderItemsList, order.orderItemsList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, status, date, address, orderNotes, orderItemsList);
+        return Objects.hash(id, user, status, date, address, orderNotes, paymentMethod, orderItemsList);
     }
 }

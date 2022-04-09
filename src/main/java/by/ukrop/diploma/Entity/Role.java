@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Category {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +15,11 @@ public class Category {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    private List<Dish> dishesList;
+    @OneToMany(mappedBy = "role")
+    private List<User> userList;
 
-    public Category() {}
+    public Role() {
+    }
 
     public Long getId() {
         return id;
@@ -40,8 +41,8 @@ public class Category {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return id == category.id && Objects.equals(name, category.name);
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) && Objects.equals(name, role.name);
     }
 
     @Override

@@ -15,16 +15,16 @@ public class Dish {
     @JoinColumn(name="category_id", referencedColumnName = "id")
     private Category category;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "price")
+    @Column
     private double price;
 
-    @Column(name = "description")
+    @Column
     private String description;
 
-    @Column(name = "image")
+    @Column
     private String image;
 
     public Dish() {

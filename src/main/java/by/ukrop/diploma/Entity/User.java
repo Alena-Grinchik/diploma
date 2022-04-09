@@ -10,29 +10,31 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column
     private Long id;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "email")
+    @Column
     private String email;
 
-    @Column(name = "password")
+    @Column
     private String password;
 
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "address")
+    @Column
     private String address;
 
-    @Column(name = "discount")
-    private Long discount;
+    @ManyToOne
+    @JoinColumn(name="role_id", referencedColumnName = "id")
+    private Role role;
 
-    @OneToOne(mappedBy = "user")
-    private Authorities authorities;
+    @ManyToOne
+    @JoinColumn(name="discount_id", referencedColumnName = "id")
+    private Discount discount;
 
     @OneToMany(mappedBy = "user")
     private List <Order> ordersList;
@@ -88,12 +90,28 @@ public class User {
         this.address = address;
     }
 
-    public Long getDiscount() {
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Discount getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Long discount) {
+    public void setDiscount(Discount discount) {
         this.discount = discount;
+    }
+
+    public List<Order> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Order> ordersList) {
+        this.ordersList = ordersList;
     }
 
     @Override
@@ -101,11 +119,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && discount == user.discount && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(address, user.address);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(address, user.address) && Objects.equals(role, user.role) && Objects.equals(discount, user.discount) && Objects.equals(ordersList, user.ordersList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, phoneNumber, address, discount);
+        return Objects.hash(id, name, email, password, phoneNumber, address, role, discount, ordersList);
     }
 }

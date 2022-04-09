@@ -7,7 +7,7 @@ import java.util.Objects;
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column
     private Long id;
 
     @ManyToOne
@@ -18,7 +18,7 @@ public class OrderItem {
     @JoinColumn(name="order_id", referencedColumnName = "id")
     private Order order;
 
-    @Column(name="quantity")
+    @Column
     private Long quantity;
 
     public OrderItem() {

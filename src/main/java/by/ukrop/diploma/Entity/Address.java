@@ -8,23 +8,23 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column
     private Long id;
 
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "city")
+    @Column
     private String city;
 
-    @Column(name = "street")
+    @Column
     private String street;
 
-    @Column(name = "building")
+    @Column
     private String building;
 
-    @Column(name = "number")
+    @Column
     private String number;
 
     public Address() {
