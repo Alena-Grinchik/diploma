@@ -1,4 +1,4 @@
-package by.ukrop.diploma.Entity;
+package by.ukrop.diploma.entity;
 
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package by.ukrop.diploma.Entity;
+package by.ukrop.diploma.entity;
 
 import by.ukrop.diploma.PaymentMethod;
 
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name="Orders")
 public class Order {
 
     @Id
@@ -29,8 +29,8 @@ public class Order {
     @JoinColumn(name="address_id", referencedColumnName = "id")
     private Address address;
 
-    @Column(name = "order_notes")
-    private String orderNotes;
+    @Column(name = "order_comment")
+    private String orderComment;
 
     @Enumerated
     private PaymentMethod paymentMethod;
@@ -81,12 +81,12 @@ public class Order {
         this.address = address;
     }
 
-    public String getOrderNotes() {
-        return orderNotes;
+    public String getOrderComment() {
+        return orderComment;
     }
 
-    public void setOrderNotes(String orderNotes) {
-        this.orderNotes = orderNotes;
+    public void setOrderComment(String orderNotes) {
+        this.orderComment = orderNotes;
     }
 
     public PaymentMethod getPaymentMethod() {
@@ -110,11 +110,11 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(user, order.user) && Objects.equals(status, order.status) && Objects.equals(date, order.date) && Objects.equals(address, order.address) && Objects.equals(orderNotes, order.orderNotes) && paymentMethod == order.paymentMethod && Objects.equals(orderItemsList, order.orderItemsList);
+        return Objects.equals(id, order.id) && Objects.equals(user, order.user) && Objects.equals(status, order.status) && Objects.equals(date, order.date) && Objects.equals(address, order.address) && Objects.equals(orderComment, order.orderComment) && paymentMethod == order.paymentMethod && Objects.equals(orderItemsList, order.orderItemsList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, status, date, address, orderNotes, paymentMethod, orderItemsList);
+        return Objects.hash(id, user, status, date, address, orderComment, paymentMethod, orderItemsList);
     }
 }
