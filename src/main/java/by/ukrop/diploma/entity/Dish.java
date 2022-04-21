@@ -34,6 +34,14 @@ public class Dish {
         return id;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

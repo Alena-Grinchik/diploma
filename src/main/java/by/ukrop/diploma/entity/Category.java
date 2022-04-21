@@ -15,7 +15,7 @@ public class Category {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch=FetchType.EAGER)
     private List<Dish> dishesList;
 
     public Category() {}
@@ -36,6 +36,14 @@ public class Category {
         this.name = name;
     }
 
+    public List<Dish> getDishesList() {
+        return dishesList;
+    }
+
+    public void setDishesList(List<Dish> dishesList) {
+        this.dishesList = dishesList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,5 +55,9 @@ public class Category {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    public String getAnchorName(){
+        return "category-"+this.getId();
     }
 }
