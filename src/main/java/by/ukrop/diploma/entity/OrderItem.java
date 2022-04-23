@@ -11,8 +11,8 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="dishes_id", referencedColumnName = "id")
-    private Dish dishes;
+    @JoinColumn(name="dish_id", referencedColumnName = "id")
+    private Dish dish;
 
     @ManyToOne
     @JoinColumn(name="order_id", referencedColumnName = "id")
@@ -32,12 +32,12 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Dish getDishes() {
-        return dishes;
+    public Dish getDish() {
+        return dish;
     }
 
-    public void setDishes(Dish dishes) {
-        this.dishes = dishes;
+    public void setDish(Dish dishes) {
+        this.dish = dishes;
     }
 
     public Order getOrder() {
@@ -61,11 +61,11 @@ public class OrderItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderItem that = (OrderItem) o;
-        return Objects.equals(id, that.id) && Objects.equals(dishes, that.dishes) && Objects.equals(order, that.order) && Objects.equals(quantity, that.quantity);
+        return Objects.equals(id, that.id) && Objects.equals(dish, that.dish) && Objects.equals(order, that.order) && Objects.equals(quantity, that.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dishes, order, quantity);
+        return Objects.hash(id, dish, order, quantity);
     }
 }

@@ -46,3 +46,11 @@ strong {
     width:30px;
     height:30px;
 }
+
+.cartlink {
+    margin-right: 35px;
+}
+
+.addItemForm {
+    display: inline;
+}

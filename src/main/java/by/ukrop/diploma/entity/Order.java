@@ -3,11 +3,11 @@ package by.ukrop.diploma.entity;
 import by.ukrop.diploma.PaymentMethod;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name="Orders")
+@Entity (name="orders")
 public class Order {
 
     @Id
@@ -23,7 +23,7 @@ public class Order {
     private String status;
 
     @Column
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name="address_id", referencedColumnName = "id")
@@ -32,10 +32,11 @@ public class Order {
     @Column(name = "order_comment")
     private String orderComment;
 
+    @Column(name= "payment_method")
     @Enumerated
     private PaymentMethod paymentMethod;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch=FetchType.EAGER)
     private List<OrderItem> orderItemsList;
 
     public Order() {
@@ -65,11 +66,11 @@ public class Order {
         this.status = status;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

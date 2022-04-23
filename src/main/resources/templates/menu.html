@@ -41,7 +41,10 @@
 
             </ul>
             <div class="d-flex">
-                <a href="#"><img class="cart" src="/images/cart.png" title="Корзина"></a>
+                <a href="#" class="cartlink position-relative"><img class="cart" src="/images/cart.png" title="Корзина">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" th:text="${currentOrderSize}">
+                    <span class="visually-hidden">предметов в корзине</span>
+                    </span></a>
                 <a href="#"><img class="login" src="/images/login.png" title="Войти"></a>
                 <a href="#"><img class="local" src="/images/ENG.png"></a>
                 <a href="#"><img class="local" src="/images/RU.png"></a>
@@ -71,7 +74,10 @@
                            <strong class="card-text fs-4 ">
                                <span th:text="${#numbers.formatDecimal(dish.price, 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
                            </strong>
-                            <a href="#" class="btn btn-outline-success float-end">В Корзину</a>
+                            <form class="addItemForm" action="/addItem" method="post">
+                                <input type="hidden" name="dishId" th:value="${dish.id}">
+                                <button type="submit" class="btn btn-outline-success float-end">В корзину</button>
+                            </form>
                         </div>
                     </div>
                 </div>
