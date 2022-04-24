@@ -118,4 +118,12 @@ public class Order {
     public int hashCode() {
         return Objects.hash(id, user, status, date, address, orderComment, paymentMethod, orderItemsList);
     }
+
+    public Double orderTotal(){
+        Double result = 0.00;
+        for(OrderItem item:getOrderItemsList()){
+          result += item.getDish().getPrice()*item.getQuantity();
+        }
+        return result;
+    }
 }

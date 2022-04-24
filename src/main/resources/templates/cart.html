@@ -55,33 +55,102 @@
 
 <!-- Page Content -->
 <div class="container">
-    <div class="card border-0 shadow my-5 bg-light">
-        <div class="card-body p-5" th:each="category : ${categories}">
-            <a th:attr="name=${category.getAnchorName()}"></a>
-            <div style="height: 25px"></div>
-            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-                <h1 class="display-4 fw-normal" th:text="${category.name}"></h1>
-            </div>
-            <div class="row row-cols-3 g-4">
-                <div class="col" th:each="dish : ${category.getDishesList()}">
-                    <div class="card border-success mb-3 h-100 shadow" style="width: 20rem;">
-                        <img th:attr="src=${dish.image}" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${dish.name}"></h5>
-                            <p class="card-text" th:text="${dish.description}"></p>
-                        </div>
-                        <div class="card-footer bg-transparent border-white">
-                           <strong class="card-text fs-4 ">
-                               <span th:text="${#numbers.formatDecimal(dish.price, 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
-                           </strong>
-                            <form class="addItemForm" action="/addItem" method="post">
-                                <input type="hidden" name="dishId" th:value="${dish.id}">
-                                <button type="submit" class="btn btn-outline-success float-end">В корзину</button>
-                            </form>
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-2">
+            <section class="vh-10">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center h-100">
+                        <div class="col">
+                            <p><span class="h4 pt-2" th:text="'Товаров в корзине: '+${currentOrderSize}"></span></p>
+                            <div class="card border-white mb-0">
+                                <div class="card-body p-4 pb-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <p class="mb-4 pb-0 lead">Фото</p>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="mb-4 pb-0 lead">Наименование</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="mb-4 pb-0 lead">Описание</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="mb-4 pb-0 lead">Количество</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="mb-4 pb-0 lead">Цена</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="mb-4 pb-0 lead">Итог</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4" th:each="orderItem : ${currentOrder.getOrderItemsList()}">
+                                <div class="card-body p-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-2">
+                                            <img th:attr="src=${orderItem.getDish().getImage()}" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-2 d-flex ">
+                                            <div>
+                                                <p class="lead fw-normal mb-0" th:text="${orderItem.getDish().getName()}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="small text-muted fw-normal mb-0" th:text="${orderItem.getDish().getDescription()}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="lead fw-normal mb-0" th:text="${orderItem.getQuantity()}"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 d-flex justify-content-center">
+                                            <div>
+                                                <p class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-5">
+                                <div class="card-body p-4">
+
+                                    <div class="float-end">
+                                        <p class="mb-0 me-5 d-flex align-items-center">
+                                            <span class="small text-muted me-2">Итого заказ:</span> <span class="lead fw-normal" th:text="${#numbers.formatDecimal(currentOrder.orderTotal(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn shadow  btn-light btn-lg me-2">Continue shopping</button>
+                                <button type="button" class="btn shadow  btn-primary btn-lg">Add to cart</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 </div>

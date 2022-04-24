@@ -22,10 +22,19 @@ strong {
     background-color: #88ae30;
     color: whitesmoke;
 }
+
+.btn-secondary{
+    background-color: darkgray;
+    color: whitesmoke;
+}
+
+.btn-secondary:hover{
+    background-color: dimgrey !important;
+}
+
 .btn:hover{
     background-color:#78992E;
 }
-
 
 .navbar-brand{
     padding: 0px;
@@ -36,11 +45,13 @@ strong {
     width:30px;
     height:30px;
 }
+
 .login{
     margin-right: 35px;
     width:20px;
     height:20px;
 }
+
 .cart{
     margin-right: 10px;
     width:30px;
