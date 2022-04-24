@@ -8,4 +8,8 @@ public interface OrderItemService {
     void addOrderItem(OrderItem orderItem);
 
     OrderItem getByOrderAndDish(Order order, Dish dish);
+
+    void removeOrderItem(Long id);
+
+    void updateOrderItemQuantity(Long id, Long delta);
 }

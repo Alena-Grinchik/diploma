@@ -9,7 +9,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -39,5 +38,20 @@ public class OrderItemDAOImpl implements OrderItemDAO{
         cr.select(root).where(cb.and(sameOrder, sameDish));
         Query<OrderItem> query = currentSession.createQuery(cr);
         return query.getResultList().stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public void removeOrderItem(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.clear();
+        OrderItem orderItem = new OrderItem();
+        orderItem.setId(id);
+        currentSession.delete(orderItem);
+    }
+
+    @Override
+    public OrderItem getOrderItem(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        return currentSession.get(OrderItem.class, id);
     }
 }

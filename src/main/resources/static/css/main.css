@@ -81,6 +81,7 @@ strong {
     margin-right: 35px;
 }
 
-.addItemForm {
+.addItemForm, .removeItemForm, .updateOrderItemQuantityForm {
     display: inline;
 }
+

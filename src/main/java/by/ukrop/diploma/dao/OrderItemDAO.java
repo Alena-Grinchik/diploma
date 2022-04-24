@@ -9,5 +9,7 @@ public interface OrderItemDAO {
 
     OrderItem getByOrderAndDish(Order order, Dish dish);
 
+    void removeOrderItem(Long id);
 
+    OrderItem getOrderItem(Long id);
 }
