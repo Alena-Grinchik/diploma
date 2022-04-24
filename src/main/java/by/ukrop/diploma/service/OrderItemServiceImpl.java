@@ -1,6 +1,8 @@
 package by.ukrop.diploma.service;
 
 import by.ukrop.diploma.dao.OrderItemDAO;
+import by.ukrop.diploma.entity.Dish;
+import by.ukrop.diploma.entity.Order;
 import by.ukrop.diploma.entity.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,13 @@ public class OrderItemServiceImpl implements OrderItemService{
 
     @Override
     @Transactional
-    public Long addOrderItem(OrderItem orderItem) {
-        return orderItemDAO.addOrderItem(orderItem);
+    public void addOrderItem(OrderItem orderItem) {
+        orderItemDAO.addOrderItem(orderItem);
+    }
+
+    @Override
+    @Transactional
+    public OrderItem getByOrderAndDish(Order order, Dish dish) {
+        return orderItemDAO.getByOrderAndDish(order, dish);
     }
 }

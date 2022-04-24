@@ -74,12 +74,17 @@ public class MenuController {
 
         Order currentOrder = orderService.getOrder(orderId);
         Dish currentDish = dishService.getDish(dishId);
+        OrderItem currentOrderItem = orderItemService.getByOrderAndDish(currentOrder, currentDish);
 
-        OrderItem currentOrderItem = new OrderItem();
-        currentOrderItem.setOrder(currentOrder);
-        currentOrderItem.setDish(currentDish);
+        if (currentOrderItem!=null){
+            currentOrderItem.setQuantity(currentOrderItem.getQuantity()+1);
+        } else {
+            currentOrderItem = new OrderItem();
+            currentOrderItem.setOrder(currentOrder);
+            currentOrderItem.setDish(currentDish);
+            currentOrderItem.setQuantity(1L);
+        }
         orderItemService.addOrderItem(currentOrderItem);
-
         return new RedirectView("/menu");
     }
 }
