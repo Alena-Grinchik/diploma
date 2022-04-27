@@ -1,3 +1,7 @@
+html {
+    scroll-padding-top: 40px; /* height of sticky header */
+}
+
 body {
     background: url('/images/background.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;

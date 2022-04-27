@@ -1,16 +1,13 @@
 package by.ukrop.diploma.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
-public class IndexController {
+public class IndexController extends SuperController{
 
     @GetMapping("/")
-    public String hello(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "hello";
+    public String hello() {
+        return "index";
     }
 }
