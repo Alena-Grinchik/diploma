@@ -18,6 +18,14 @@ nav{
     color: ghostwhite;
 }
 
+.sticky-offset{
+    top:70px;
+}
+
+.manual-text-size {
+    font-size: 12px;
+}
+
 strong {
     color: #88ae30 !important;
 }

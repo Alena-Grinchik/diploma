@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+<body>
+<section layout:fragment="content">
+<!-- Page Content -->
+<div class="container">
+    <div class="card border-0 shadow my-5 bg-light">
+        <div class="card-body p-5">
+            <div class="container">
+                <div class="py-5 text-center">
+                    <img class="d-block mx-auto mb-4" src="/images/the-dill-logo.png" width="90" height="90">
+                    <h3>Оформление заказа</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 order-md-2 mb-4">
+                        <ul class="list-group mb-3 sticky-offset sticky-top">
+                            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted">Корзина</span>
+                                <span class="badge badge-secondary badge-pill"></span>
+                            </h4>
+                            <li class="list-group-item d-flex justify-content-between lh-condensed align-items-center row" th:each="orderItem : ${currentOrder.getOrderItemsList()}">
+                                <div class="col-md-8">
+                                    <h6 class="my-0" th:text="${orderItem.getDish().getName()}"></h6>
+                                    <p class="text-muted manual-text-size" th:text="${orderItem.getDish().getDescription()}"></p>
+                                </div>
+                                <span class="text-muted col-md-4 align-middle" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between row">
+                                <span class="col-md-8">Итого заказ</span>
+                                <strong class="col-md-4" th:text="${#numbers.formatDecimal(currentOrder.orderTotal(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></strong>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8 order-md-1">
+                        <h4 class="mb-3">Контактная информация</h4>
+                        <form class="needs-validation" novalidate="">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Имя</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                                    <div class="invalid-feedback">Укажите Ваше имя </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Фамилия</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                                    <div class="invalid-feedback">Укажите Вашу фамилию </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Телефон</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">+375</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="username" required="">
+                                    <div class="invalid-feedback" style="width: 100%;"> Укажите Ваш номер телефона </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email">
+                                <div class="invalid-feedback">Укажите Ваш email </div>
+                            </div>
+                            <hr class="mb-4">
+                            <h4 class="mb-3">Адрес доставки</h4>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <label for="street">Улица</label>
+                                    <input type="text" class="form-control" id="street" required="">
+                                    <div class="invalid-feedback">Введите название улицы</div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="building">Дом</label>
+                                    <input type="text" class="form-control" id="building" required="">
+                                    <div class="invalid-feedback">Введите номер дом</div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="enclosure">Корпуc</label>
+                                    <input type="text" class="form-control" id="enclosure">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label for="entrance">Подъезд</label>
+                                    <input type="text" class="form-control" id="entrance" required="">
+                                    <div class="invalid-feedback">Введите номер подъезда</div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="flat">Квартира</label>
+                                    <input type="text" class="form-control" id="flat"required="">
+                                    <div class="invalid-feedback">Введите номер квартиры</div>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label for="floor">Этаж</label>
+                                    <input type="text" class="form-control" id="floor">
+                                    <div class="invalid-feedback">Введите номер этажа</div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="code">Код подъезда</label>
+                                    <input type="text" class="form-control" id="code">
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <h4 class="mb-3">Метод оплаты</h4>
+                            <div class="d-block my-3">
+                                <div class="custom-control custom-radio">
+                                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                                    <label class="custom-control-label" for="credit">Картой курьеру</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                                    <label class="custom-control-label" for="debit">Наличными</label>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <h4 class="mb-3">Комментарии</h4>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Оставьте Ваш комментарий к заказу" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Оставьте Ваш комментарий к заказу</label>
+                            </div>
+                            <hr class="mb-4">
+                            <a class="btn btn-secondary shadow btn-lg me-3" href="/cart" role="button">Вернуться к корзине</a>
+                            <button class="btn btn-primary shadow btn-lg btn-block" type="submit">Оформить заказ</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</body>
+</html>
