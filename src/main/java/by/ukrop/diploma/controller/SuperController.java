@@ -1,7 +1,7 @@
 package by.ukrop.diploma.controller;
 
-import by.ukrop.diploma.entity.Category;
-import by.ukrop.diploma.entity.Order;
+import by.ukrop.diploma.peristance.entity.Category;
+import by.ukrop.diploma.peristance.entity.Order;
 import by.ukrop.diploma.service.CategoryService;
 import by.ukrop.diploma.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

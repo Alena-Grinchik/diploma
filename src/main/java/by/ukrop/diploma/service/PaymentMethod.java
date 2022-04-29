@@ -1,4 +1,4 @@
-package by.ukrop.diploma;
+package by.ukrop.diploma.service;
 
 public enum PaymentMethod {
     CASH,

@@ -1,9 +1,9 @@
 package by.ukrop.diploma.service;
 
-import by.ukrop.diploma.dao.OrderItemDAO;
-import by.ukrop.diploma.entity.Dish;
-import by.ukrop.diploma.entity.Order;
-import by.ukrop.diploma.entity.OrderItem;
+import by.ukrop.diploma.peristance.dao.OrderItemDAO;
+import by.ukrop.diploma.peristance.entity.Dish;
+import by.ukrop.diploma.peristance.entity.Order;
+import by.ukrop.diploma.peristance.entity.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

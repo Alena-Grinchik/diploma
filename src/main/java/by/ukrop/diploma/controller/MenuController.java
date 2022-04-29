@@ -1,8 +1,8 @@
 package by.ukrop.diploma.controller;
 
-import by.ukrop.diploma.entity.Dish;
-import by.ukrop.diploma.entity.Order;
-import by.ukrop.diploma.entity.OrderItem;
+import by.ukrop.diploma.peristance.entity.Dish;
+import by.ukrop.diploma.peristance.entity.Order;
+import by.ukrop.diploma.peristance.entity.OrderItem;
 import by.ukrop.diploma.service.DishService;
 import by.ukrop.diploma.service.OrderItemService;
 import by.ukrop.diploma.service.OrderService;

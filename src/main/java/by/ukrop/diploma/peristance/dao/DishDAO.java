@@ -1,7 +1,7 @@
-package by.ukrop.diploma.service;
+package by.ukrop.diploma.peristance.dao;
 
 import by.ukrop.diploma.peristance.entity.Dish;
 
-public interface DishService {
+public interface DishDAO {
     Dish getDish (Long id);
 }

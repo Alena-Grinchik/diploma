@@ -1,8 +1,8 @@
-package by.ukrop.diploma.dao;
+package by.ukrop.diploma.peristance.dao;
 
-import by.ukrop.diploma.entity.Dish;
-import by.ukrop.diploma.entity.Order;
-import by.ukrop.diploma.entity.OrderItem;
+import by.ukrop.diploma.peristance.entity.Dish;
+import by.ukrop.diploma.peristance.entity.Order;
+import by.ukrop.diploma.peristance.entity.OrderItem;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

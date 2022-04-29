@@ -1,6 +1,6 @@
-package by.ukrop.diploma.dao;
+package by.ukrop.diploma.peristance.dao;
 
-import by.ukrop.diploma.entity.Order;
+import by.ukrop.diploma.peristance.entity.Order;
 
 public interface OrderDAO {
     Order getOrder(Long id);

@@ -1,6 +1,6 @@
-package by.ukrop.diploma.entity;
+package by.ukrop.diploma.peristance.entity;
 
-import by.ukrop.diploma.PaymentMethod;
+import by.ukrop.diploma.service.PaymentMethod;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
