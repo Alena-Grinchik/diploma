@@ -26,7 +26,7 @@ public class AppContext {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("by.ukrop.diploma.peristance.entity");
+        sessionFactory.setPackagesToScan("by.ukrop.diploma.persistence");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
