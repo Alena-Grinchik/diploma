@@ -1,7 +1,5 @@
 package by.ukrop.diploma.controller;
 
-import by.ukrop.diploma.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +11,6 @@ import java.io.IOException;
 
 @Controller
 public class CheckOutController extends SuperController{
-
-    @Autowired
-    private OrderService orderService;
 
     @GetMapping("/checkOut")
     public String checkOut(HttpServletRequest request, HttpServletResponse httpResponse, Model model) throws IOException {

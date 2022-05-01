@@ -1,4 +1,4 @@
-package by.ukrop.diploma.peristance.entity;
+package by.ukrop.diploma.persistence.entity;
 
 import by.ukrop.diploma.service.PaymentMethod;
 
@@ -28,6 +28,18 @@ public class Order {
     @ManyToOne
     @JoinColumn(name="address_id", referencedColumnName = "id")
     private Address address;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private String phoneNumber;
+
+    @Column
+    private String email;
 
     @Column(name = "order_comment")
     private String orderComment;
@@ -106,17 +118,49 @@ public class Order {
         this.orderItemsList = orderItemsList;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(user, order.user) && Objects.equals(status, order.status) && Objects.equals(date, order.date) && Objects.equals(address, order.address) && Objects.equals(orderComment, order.orderComment) && paymentMethod == order.paymentMethod && Objects.equals(orderItemsList, order.orderItemsList);
+        return Objects.equals(id, order.id) && Objects.equals(user, order.user) && Objects.equals(status, order.status) && Objects.equals(date, order.date) && Objects.equals(address, order.address) && Objects.equals(firstName, order.firstName) && Objects.equals(lastName, order.lastName) && Objects.equals(phoneNumber, order.phoneNumber) && Objects.equals(email, order.email) && Objects.equals(orderComment, order.orderComment) && paymentMethod == order.paymentMethod && Objects.equals(orderItemsList, order.orderItemsList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, status, date, address, orderComment, paymentMethod, orderItemsList);
+        return Objects.hash(id, user, status, date, address, firstName, lastName, phoneNumber, email, orderComment, paymentMethod, orderItemsList);
     }
 
     public Double orderTotal(){

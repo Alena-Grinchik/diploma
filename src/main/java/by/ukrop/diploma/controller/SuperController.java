@@ -1,7 +1,7 @@
 package by.ukrop.diploma.controller;
 
-import by.ukrop.diploma.peristance.entity.Category;
-import by.ukrop.diploma.peristance.entity.Order;
+import by.ukrop.diploma.persistence.entity.Category;
+import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.service.CategoryService;
 import by.ukrop.diploma.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ import java.util.List;
 public class SuperController {
 
     @Autowired
-    private CategoryService categoryService;
+    protected CategoryService categoryService;
 
     @Autowired
-    private OrderService orderService;
+    protected OrderService orderService;
 
     @ModelAttribute("categories")
     public List<Category> getCategories() {

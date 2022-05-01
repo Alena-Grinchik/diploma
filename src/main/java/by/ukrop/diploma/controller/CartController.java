@@ -1,7 +1,6 @@
 package by.ukrop.diploma.controller;
 
 import by.ukrop.diploma.service.OrderItemService;
-import by.ukrop.diploma.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +14,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class CartController extends SuperController{
-
-    @Autowired
-    private OrderService orderService;
 
     @Autowired
     private OrderItemService orderItemService;

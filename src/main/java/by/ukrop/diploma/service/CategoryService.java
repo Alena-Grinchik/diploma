@@ -1,6 +1,6 @@
 package by.ukrop.diploma.service;
 
-import by.ukrop.diploma.peristance.entity.Category;
+import by.ukrop.diploma.persistence.entity.Category;
 
 import java.util.List;
 

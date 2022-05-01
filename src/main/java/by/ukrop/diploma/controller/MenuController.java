@@ -1,11 +1,10 @@
 package by.ukrop.diploma.controller;
 
-import by.ukrop.diploma.peristance.entity.Dish;
-import by.ukrop.diploma.peristance.entity.Order;
-import by.ukrop.diploma.peristance.entity.OrderItem;
+import by.ukrop.diploma.persistence.entity.Dish;
+import by.ukrop.diploma.persistence.entity.Order;
+import by.ukrop.diploma.persistence.entity.OrderItem;
 import by.ukrop.diploma.service.DishService;
 import by.ukrop.diploma.service.OrderItemService;
-import by.ukrop.diploma.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +22,6 @@ public class MenuController extends SuperController{
 
     @Autowired
     private DishService dishService;
-
-    @Autowired
-    private OrderService orderService;
 
     @Autowired
     private OrderItemService orderItemService;

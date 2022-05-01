@@ -1,6 +1,6 @@
-package by.ukrop.diploma.peristance.dao;
+package by.ukrop.diploma.persistence.dao;
 
-import by.ukrop.diploma.peristance.entity.Order;
+import by.ukrop.diploma.persistence.entity.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

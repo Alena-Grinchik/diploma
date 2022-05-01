@@ -1,6 +1,6 @@
 package by.ukrop.diploma.service;
 
-import by.ukrop.diploma.peristance.entity.Order;
+import by.ukrop.diploma.persistence.entity.Order;
 
 public interface OrderService {
     Order getOrder(Long id);
