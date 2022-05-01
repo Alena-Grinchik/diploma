@@ -6,4 +6,6 @@ public interface OrderDAO {
     Order getOrder(Long id);
 
     Long addOrder(Order order);
+
+    void updateOrder(Order order);
 }

@@ -23,4 +23,10 @@ public class OrderDAOImpl implements OrderDAO{
         Session currentSession = sessionFactory.getCurrentSession();
         return (Long) currentSession.save(order);
     }
+
+    @Override
+    public void updateOrder(Order order) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.update(order);
+    }
 }

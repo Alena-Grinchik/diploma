@@ -23,4 +23,10 @@ public class OrderServiceImpl implements OrderService{
     public Long addOrder(Order order) {
         return orderDAO.addOrder(order);
     }
+
+    @Override
+    @Transactional
+    public void updateOrder(Order order) {
+        orderDAO.updateOrder(order);
+    }
 }
