@@ -57,6 +57,20 @@ strong {
     background-color:#78992E;
 }
 
+.sign-in-btn{
+    width: 100%;
+}
+
+.registration-btn{
+    width: 100%;
+    background-color: darkblue;
+}
+
+.registration-btn:hover{
+    background-color: blue;
+    color: whitesmoke;
+}
+
 .trash-icon{
     background-color:white;
     color: red;

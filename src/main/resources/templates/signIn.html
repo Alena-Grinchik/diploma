@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <link href="/css/signIn.css" rel="stylesheet">
+</head>
+
+<body>
+<section layout:fragment="content">
+<!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="_lk_de">
+                    <div class="form-03-main">
+                        <div class="logoSignIn">
+                            <img src="/images/signIn.png">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control _ge_de_ol" placeholder="email" required="" aria-required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control _ge_de_ol" placeholder="Пароль" required="" aria-required="true">
+                        </div>
+
+                       <!-- <div class="checkbox form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="">
+                                <label class="form-check-label" for="">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="#">Forgot Password</a>
+                        </div>-->
+
+                        <div class="form-group">
+                            <button class="btn btn-primary rounded-pill sign-in-btn shadow btn-lg btn-block" type="submit">Войти</button>
+                        </div>
+                        <div class="form-group nm_lk">
+                            <span class="fw-bolder">Hет аккаунта?</span>
+                            <a class="fw-bolder" href="/registration" role="button">Зарегистрироваться</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
