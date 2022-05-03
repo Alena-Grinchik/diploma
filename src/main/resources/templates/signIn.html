@@ -2,46 +2,34 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
 <head>
-    <link href="/css/signIn.css" rel="stylesheet">
+    <script src="/js/main.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <section layout:fragment="content">
-<!-- Page Content -->
+    <!-- Page Content -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="_lk_de">
-                    <div class="form-03-main">
-                        <div class="logoSignIn">
-                            <img src="/images/signIn.png">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control _ge_de_ol" placeholder="email" required="" aria-required="true">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" name="password" class="form-control _ge_de_ol" placeholder="Пароль" required="" aria-required="true">
-                        </div>
-
-                       <!-- <div class="checkbox form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="">
-                                <label class="form-check-label" for="">
-                                    Remember me
-                                </label>
-                            </div>
-                            <a href="#">Forgot Password</a>
-                        </div>-->
-
-                        <div class="form-group">
-                            <button class="btn btn-primary rounded-pill sign-in-btn shadow btn-lg btn-block" type="submit">Войти</button>
-                        </div>
-                        <div class="form-group nm_lk">
-                            <span class="fw-bolder">Hет аккаунта?</span>
-                            <a class="fw-bolder" href="/registration" role="button">Зарегистрироваться</a>
-                        </div>
+        <div class="card border-0 shadow my-5 transparent-container">
+            <div class="card-body p-5">
+                <div class="logoSignIn">
+                    <img src="/images/signIn.png">
+                </div>
+                <form class="needs-validation" method="post" action="/signIn" novalidate="">
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required="">
+                        <div class="invalid-feedback">Укажите Ваш email </div>
                     </div>
+                    <div class="mb-3">
+                        <label for="password">Пароль</label>
+                        <input type="text" class="form-control" id="password" name="password" required="">
+                        <div class="invalid-feedback">Укажите Ваш пароль</div>
+                    </div>
+                    <button class="btn rounded-pill sign-in-btn shadow btn-lg btn-block mt-4" type="submit">Войти</button>
+                </form>
+                <div class="mt-4 justify-content-center text-center">
+                    <span class="fw-bolder">Нет аккаунта?</span>
+                    <a class="fw-bolder" href="/registration" role="button">Зарегистрироваться</a>
                 </div>
             </div>
         </div>
