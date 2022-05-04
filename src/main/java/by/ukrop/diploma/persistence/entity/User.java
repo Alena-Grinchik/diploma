@@ -14,9 +14,12 @@ public class User {
     private Long id;
 
     @Column
-    private String name;
+    private String firstName;
 
     @Column
+    private String lastName;
+
+    @Column(unique = true)
     private String email;
 
     @Column
@@ -25,8 +28,8 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column
-    private String address;
+    @OneToMany(mappedBy = "user")
+    private List <Address> address;
 
     @ManyToOne
     @JoinColumn(name="role_id", referencedColumnName = "id")
@@ -50,12 +53,24 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -80,14 +95,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Role getRole() {
@@ -119,11 +126,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(address, user.address) && Objects.equals(role, user.role) && Objects.equals(discount, user.discount) && Objects.equals(ordersList, user.ordersList);
+        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(address, user.address) && Objects.equals(role, user.role) && Objects.equals(discount, user.discount) && Objects.equals(ordersList, user.ordersList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, phoneNumber, address, role, discount, ordersList);
+        return Objects.hash(id, firstName, lastName, email, password, phoneNumber, address, role, discount, ordersList);
     }
 }
