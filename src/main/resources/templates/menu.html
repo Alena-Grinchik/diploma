@@ -16,6 +16,7 @@
             <div class="row row-cols-3 g-4">
                 <div class="col" th:each="dish : ${category.getDishesList()}">
                     <div class="card border-success mb-3 h-100 shadow" style="width: 20rem;">
+                        <a th:attr="name='dish-'+${dish.getId()}"></a>
                         <img th:attr="src=${dish.image}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${dish.name}"></h5>

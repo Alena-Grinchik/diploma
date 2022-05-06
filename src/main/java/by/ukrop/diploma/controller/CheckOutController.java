@@ -10,13 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Controller
@@ -38,7 +39,7 @@ public class CheckOutController extends SuperController{
     }
 
     @PostMapping("/checkOut")
-    public RedirectView checkOut(@RequestParam(value = "firstName") String firstName,
+    public String checkOut(@RequestParam(value = "firstName") String firstName,
                                  @RequestParam(value = "lastName") String lastName,
                                  @RequestParam(value = "phoneNumber") String phoneNumber,
                                  @RequestParam(value = "email") String email,
@@ -51,9 +52,11 @@ public class CheckOutController extends SuperController{
                                  @RequestParam(value = "code") String code,
                                  @RequestParam(value = "orderComment") String orderComment,
                                  @RequestParam(value = "paymentMethod") String paymentMethod,
-                                 HttpServletRequest request
+                                 HttpServletRequest request,
+                                 HttpServletResponse httpResponse,
+                                 Model model
 
-    ){
+    ) throws IOException {
         Pattern firstNamePattern = Pattern.compile("^[A-Za-zА-Яа-яёЁ\\- ]+$");
         Pattern lastNamePattern = Pattern.compile("^[A-Za-zА-Яа-яёЁ\\- ]+$");
         Pattern phoneNumberPattern = Pattern.compile("^(\\d{2}|[(]?[0-9]{2}[)])(\\d{7})$");
@@ -63,30 +66,41 @@ public class CheckOutController extends SuperController{
         Pattern entrancePattern = Pattern.compile("^[0-9A-Za-zА-Яа-яёЁ]+$");
         Pattern apartmentPattern = Pattern.compile("^[0-9]+$");
 
-        if (
-                !firstNamePattern.matcher(firstName).matches() ||
-                !lastNamePattern.matcher(lastName).matches() ||
-                !phoneNumberPattern.matcher(phoneNumber).matches() ||
-                !emailPattern.matcher(email).matches() ||
-                !streetPattern.matcher(street).matches() ||
-                !buildingPattern.matcher(building).matches() ||
-                !entrancePattern.matcher(entrance).matches() ||
-                !apartmentPattern.matcher(apartment).matches() ||
-                !(paymentMethod != null && (paymentMethod.equals("cash") || paymentMethod.equals("card")))
-        ){
-            System.out.println("----------------------------------------------------------------------------------------");
-            System.out.println(!firstNamePattern.matcher(firstName).matches());
-            System.out.println(!lastNamePattern.matcher(lastName).matches());
-            System.out.println(!phoneNumberPattern.matcher(phoneNumber).matches());
-            System.out.println(!emailPattern.matcher(email).matches());
-            System.out.println(!streetPattern.matcher(street).matches());
-            System.out.println(!buildingPattern.matcher(building).matches());
-            System.out.println(!entrancePattern.matcher(entrance).matches());
-            System.out.println(!apartmentPattern.matcher(apartment).matches());
-            System.out.println(!(paymentMethod != null && (paymentMethod.equals("cash") || paymentMethod.equals("card"))));
-            System.out.println("----------------------------------------------------------------------------------------");
-            return new RedirectView("/checkOutError");
+        List<String> errors = new ArrayList<>();
+
+        if (!firstNamePattern.matcher(firstName).matches()){
+            errors.add("Проверьте правильность введенного имени");
         }
+        if (!lastNamePattern.matcher(lastName).matches()){
+            errors.add("Проверьте правильность введенной фамилии");
+        }
+        if (!phoneNumberPattern.matcher(phoneNumber).matches()){
+            errors.add("Проверьте правильность введенного номера телефона");
+        }
+        if (!emailPattern.matcher(email).matches()){
+            errors.add("Проверьте правильность введенного email");
+        }
+        if (!streetPattern.matcher(street).matches()){
+            errors.add("Проверьте правильность введенного названия улицы");
+        }
+        if (!buildingPattern.matcher(building).matches()){
+            errors.add("Проверьте правильность введенного номера дома");
+        }
+        if (!entrancePattern.matcher(entrance).matches()){
+            errors.add("Проверьте правильность введенного номера подъезда");
+        }
+        if (!apartmentPattern.matcher(apartment).matches()){
+            errors.add("Проверьте правильность введенного номера квартиры/офиса");
+        }
+        if (!(paymentMethod != null && (paymentMethod.equals("cash") || paymentMethod.equals("card")))){
+            errors.add("Проверьте правильность введенного названия улицы");
+        }
+
+        if (!errors.isEmpty()) {
+            model.addAttribute("errors", errors);
+            return this.checkOut(request, httpResponse, model);
+        }
+
         HttpSession session = request.getSession(true);
         Long currentCartId = (Long) session.getAttribute("CurrentCart");
         PaymentMethod paymentMethodEnum;
@@ -121,6 +135,7 @@ public class CheckOutController extends SuperController{
         orderService.updateOrder(currentOrder);
         session.removeAttribute("CurrentCart");
         System.out.println("/orderStatus/"+currentCartId);
-        return new RedirectView("/orderStatus/"+currentCartId);
+        httpResponse.sendRedirect("/orderStatus/"+currentCartId);
+        return null;
     }
 }

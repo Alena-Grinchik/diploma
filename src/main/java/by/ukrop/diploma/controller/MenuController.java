@@ -60,6 +60,6 @@ public class MenuController extends SuperController{
             currentOrderItem.setQuantity(1L);
         }
         orderItemService.addOrderItem(currentOrderItem);
-        return new RedirectView("/menu");
+        return new RedirectView("/menu#dish-"+dishId);
     }
 }

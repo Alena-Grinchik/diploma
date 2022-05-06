@@ -83,7 +83,7 @@ public class RegistrationController extends SuperController{
         user.setDiscount(discount);
 
         try {
-            Long currentUserId  = userService.addUser(user);
+            userService.addUser(user);
         } catch (Exception e) {
             errors.add("Пользователь с таким email уже существует");
         }
