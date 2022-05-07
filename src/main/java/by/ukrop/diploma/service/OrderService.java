@@ -1,6 +1,7 @@
 package by.ukrop.diploma.service;
 
 import by.ukrop.diploma.persistence.entity.Order;
+import by.ukrop.diploma.persistence.entity.User;
 
 public interface OrderService {
     Order getOrder(Long id);
@@ -8,4 +9,6 @@ public interface OrderService {
     Long addOrder(Order order);
 
     void updateOrder(Order order);
+
+    Order getLastUserCart(User user);
 }

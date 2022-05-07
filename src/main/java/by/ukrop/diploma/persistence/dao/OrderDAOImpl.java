@@ -1,10 +1,17 @@
 package by.ukrop.diploma.persistence.dao;
 
 import by.ukrop.diploma.persistence.entity.Order;
+import by.ukrop.diploma.persistence.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO{
@@ -28,5 +35,19 @@ public class OrderDAOImpl implements OrderDAO{
     public void updateOrder(Order order) {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.update(order);
+    }
+
+    @Override
+    public Order getLastUserCart(User user) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = currentSession.getCriteriaBuilder();
+        CriteriaQuery<Order> cr = cb.createQuery(Order.class);
+        Root<Order> root = cr.from(Order.class);
+
+        Predicate sameUser = cb.equal(root.get("user"), user);
+        Predicate sameStatus = cb.equal(root.get("status"), "draft");
+        cr.select(root).where(cb.and(sameUser, sameStatus));
+        Query<Order> query = currentSession.createQuery(cr);
+        return query.getResultList().stream().findFirst().orElse(null);
     }
 }
