@@ -2,6 +2,7 @@ package by.ukrop.diploma.controller;
 
 import by.ukrop.diploma.persistence.entity.Address;
 import by.ukrop.diploma.persistence.entity.Order;
+import by.ukrop.diploma.persistence.entity.User;
 import by.ukrop.diploma.service.AddressService;
 import by.ukrop.diploma.service.PaymentMethod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class CheckOutController extends SuperController{
         HttpSession session = request.getSession(true);
         Long currentCartId = (Long) session.getAttribute("CurrentCart");
         model.addAttribute("currentOrder", orderService.getOrder(currentCartId));
+        User user = (User) model.getAttribute("currentUser");
+        if (user != null){
+            model.addAttribute("lastAddress", addressService.getLastUserAddress(user));
+        }
         return "checkOut";
     }
 
@@ -118,7 +123,8 @@ public class CheckOutController extends SuperController{
         address.setEntrance(entrance);
         address.setFloor(floor);
         address.setStreet(street);
-        //address.setUser();
+        User user = (User) model.getAttribute("currentUser");
+        address.setUser(user);
         Long currentAddressId = addressService.addAddress(address);
         address.setId(currentAddressId);
         currentOrder.setAddress(address);

@@ -31,7 +31,11 @@ public class SuperController {
     }
 
     @ModelAttribute("currentOrderSize")
-    public int getCurrentOrderSize(HttpServletRequest request) {
+    public int getCurrentOrderSize(HttpServletRequest request, @ModelAttribute("currentUser") User currentUser) {
+        return getCurrentOrderSize(request);
+    }
+
+    public int getCurrentOrderSize(HttpServletRequest request){
         HttpSession session = request.getSession(true);
         Long currentCartId = (Long) session.getAttribute("CurrentCart");
         if (currentCartId != null) {

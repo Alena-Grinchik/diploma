@@ -48,12 +48,12 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="firstName">Имя</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" th:value="${currentUser} ? ${currentUser.getFirstName()} : ''" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
                                     <div class="invalid-feedback">Укажите Ваше имя </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">Фамилия</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" th:value="${currentUser} ? ${currentUser.getLastName()} : ''" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
                                     <div class="invalid-feedback">Укажите Вашу фамилию </div>
                                 </div>
                             </div>
@@ -63,13 +63,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">+375</span>
                                     </div>
-                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required="" pattern="^(\d{2}|[(]?[0-9]{2}[)])(\d{7})$">
+                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:value="${currentUser} ? ${currentUser.getPhoneNumber()} : ''" required="" pattern="^(\d{2}|[(]?[0-9]{2}[)])(\d{7})$">
                                     <div class="invalid-feedback" style="width: 100%;"> Укажите Ваш номер телефона </div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required="">
+                                <input type="email" class="form-control" id="email" name="email" th:value="${currentUser} ? ${currentUser.getEmail()} : ''" required="">
                                 <div class="invalid-feedback">Укажите Ваш email </div>
                             </div>
                             <hr class="mb-4">
@@ -77,37 +77,37 @@
                             <div class="row">
                                 <div class="col-md-5 mb-3">
                                     <label for="street">Улица</label>
-                                    <input type="text" class="form-control" id="street" name="street" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ\- .]+$">
+                                    <input type="text" class="form-control" id="street" name="street" th:value="${lastAddress} ? ${lastAddress.getStreet()} : ''" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ\- .]+$">
                                     <div class="invalid-feedback">Введите название улицы</div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="building">Дом</label>
-                                    <input type="text" class="form-control" id="building" name="building" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ\- .]+$">
+                                    <input type="text" class="form-control" id="building" name="building" th:value="${lastAddress} ? ${lastAddress.getBuilding()} : ''" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ\- .]+$">
                                     <div class="invalid-feedback">Введите номер дома</div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="enclosure">Корпуc</label>
-                                    <input type="text" class="form-control" id="enclosure" name="enclosure">
+                                    <input type="text" class="form-control" id="enclosure" name="enclosure" th:value="${lastAddress} ? ${lastAddress.getEnclosure()} : ''">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label for="entrance">Подъезд</label>
-                                    <input type="text" class="form-control" id="entrance" name="entrance" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ]+$">
+                                    <input type="text" class="form-control" id="entrance" name="entrance" th:value="${lastAddress} ? ${lastAddress.getEntrance()} : ''" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ]+$">
                                     <div class="invalid-feedback">Введите номер подъезда</div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="apartment">Квартира/Офис</label>
-                                    <input type="text" class="form-control" id="apartment" name="apartment" required="" pattern="^[0-9]+$">
+                                    <input type="text" class="form-control" id="apartment" name="apartment" th:value="${lastAddress} ? ${lastAddress.getApartment()} : ''" required="" pattern="^[0-9]+$">
                                     <div class="invalid-feedback">Введите номер квартиры</div>
                                 </div>
                                 <div class="col-md-2 mb-3">
                                     <label for="floor">Этаж</label>
-                                    <input type="text" class="form-control" id="floor" name="floor">
+                                    <input type="text" class="form-control" id="floor" name="floor" th:value="${lastAddress} ? ${lastAddress.getFloor()} : ''">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="code">Код подъезда</label>
-                                    <input type="text" class="form-control" id="code" name="code">
+                                    <input type="text" class="form-control" id="code" name="code" th:value="${lastAddress} ? ${lastAddress.getCode()} : ''">
                                 </div>
                             </div>
                             <hr class="mb-4">

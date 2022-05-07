@@ -5,7 +5,6 @@ import by.ukrop.diploma.persistence.entity.Role;
 import by.ukrop.diploma.persistence.entity.User;
 import by.ukrop.diploma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,10 +63,6 @@ public class RegistrationController extends SuperController{
             errors.add("Пароль слишком короткий или не совпадает");
         }
 
-        /*HttpSession session = request.getSession(true);
-        Long currentCartId = (Long) session.getAttribute("CurrentCart");
-        Order currentOrder = orderService.getOrder(currentCartId);*/
-
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -92,11 +87,6 @@ public class RegistrationController extends SuperController{
             model.addAttribute("regErrors", errors);
             return "registration";
         }
-
-        /*currentOrder.setUser(user);
-        orderService.updateOrder(currentOrder);*/
-
-/*        orderService.updateOrder(currentOrder);*/
         httpResponse.sendRedirect("/signIn");
         return null;
     }

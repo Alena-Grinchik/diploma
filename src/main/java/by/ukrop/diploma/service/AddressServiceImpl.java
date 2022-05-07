@@ -2,6 +2,7 @@ package by.ukrop.diploma.service;
 
 import by.ukrop.diploma.persistence.dao.AddressDAO;
 import by.ukrop.diploma.persistence.entity.Address;
+import by.ukrop.diploma.persistence.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,5 +17,11 @@ public class AddressServiceImpl implements AddressService{
     @Transactional
     public Long addAddress(Address address) {
         return addressDAO.addAddress(address);
+    }
+
+    @Override
+    @Transactional
+    public Address getLastUserAddress(User user) {
+        return addressDAO.getLastUserAddress(user);
     }
 }

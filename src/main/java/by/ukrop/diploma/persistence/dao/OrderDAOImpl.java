@@ -46,7 +46,7 @@ public class OrderDAOImpl implements OrderDAO{
 
         Predicate sameUser = cb.equal(root.get("user"), user);
         Predicate sameStatus = cb.equal(root.get("status"), "draft");
-        cr.select(root).where(cb.and(sameUser, sameStatus));
+        cr.select(root).where(cb.and(sameUser, sameStatus)).orderBy(cb.desc(root.get("id")));
         Query<Order> query = currentSession.createQuery(cr);
         return query.getResultList().stream().findFirst().orElse(null);
     }
