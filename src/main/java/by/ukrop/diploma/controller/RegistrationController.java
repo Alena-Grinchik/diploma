@@ -6,6 +6,7 @@ import by.ukrop.diploma.persistence.entity.User;
 import by.ukrop.diploma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,8 @@ public class RegistrationController extends SuperController{
                                  @RequestParam(value = "password") String password,
                                  @RequestParam(value = "passwordCheck") String passwordCheck,
                                  HttpServletResponse httpResponse,
-                                 Model model
+                                 Model model,
+                                 PasswordEncoder passwordEncoder
 
     ) throws IOException {
         Pattern firstNamePattern = Pattern.compile("^[A-Za-zА-Яа-яёЁ\\- ]+$");
@@ -66,13 +68,11 @@ public class RegistrationController extends SuperController{
         Long currentCartId = (Long) session.getAttribute("CurrentCart");
         Order currentOrder = orderService.getOrder(currentCartId);*/
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
         User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-        user.setPassword(encoder.encode(password));
+        user.setPassword(passwordEncoder.encode(password));
         user.setPhoneNumber(phoneNumber);
 
         Role role = new Role();

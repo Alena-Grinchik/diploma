@@ -14,15 +14,20 @@
                 <div class="logoSignIn">
                     <img src="/images/signIn.png">
                 </div>
+                <ul class="list-unstyled" th:if="${param.error}">
+                    <li>
+                        <span class="text-danger fw-bold"> Неправильный email или пароль </span>
+                    </li>
+                </ul>
                 <form class="needs-validation" method="post" action="/signIn" novalidate="">
                     <div class="mb-3">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required="">
+                        <input type="email" class="form-control" id="email" name="username" required="">
                         <div class="invalid-feedback">Укажите Ваш email </div>
                     </div>
                     <div class="mb-3">
                         <label for="password">Пароль</label>
-                        <input type="text" class="form-control" id="password" name="password" required="">
+                        <input type="password" class="form-control" id="password" name="password" required="">
                         <div class="invalid-feedback">Укажите Ваш пароль</div>
                     </div>
                     <button class="btn rounded-pill sign-in-btn shadow btn-lg btn-block mt-4" type="submit">Войти</button>

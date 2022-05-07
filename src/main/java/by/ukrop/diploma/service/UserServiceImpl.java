@@ -3,11 +3,14 @@ package by.ukrop.diploma.service;
 import by.ukrop.diploma.persistence.dao.UserDAO;
 import by.ukrop.diploma.persistence.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserDetailsService, UserService{
 
     @Autowired
     private UserDAO userDAO;
@@ -28,5 +31,16 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public void updateUser(User user) {
         userDAO.updateUser(user);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+       User userByEmail = userDAO.getUserByEmail(username);
+       if (userByEmail==null) {
+           throw new UsernameNotFoundException("Пользователь не зарегистрирован");
+       } else {
+           return userByEmail;
+       }
     }
 }
