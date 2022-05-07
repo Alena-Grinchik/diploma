@@ -1,6 +1,5 @@
 package by.ukrop.diploma.service;
 
-
 import by.ukrop.diploma.persistence.dao.UserDAO;
 import by.ukrop.diploma.persistence.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
