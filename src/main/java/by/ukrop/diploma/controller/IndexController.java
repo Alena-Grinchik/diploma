@@ -25,4 +25,9 @@ public class IndexController extends SuperController{
     public String feedback() {
         return "feedback";
     }
+
+    @GetMapping("/delivery")
+    public String delivery() {
+        return "delivery";
+    }
 }
