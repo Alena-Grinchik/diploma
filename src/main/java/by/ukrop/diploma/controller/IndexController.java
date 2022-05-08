@@ -15,4 +15,9 @@ public class IndexController extends SuperController{
     public String contacts() {
         return "contacts";
     }
+
+    @GetMapping("/career")
+    public String career() {
+        return "career";
+    }
 }
