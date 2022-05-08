@@ -10,4 +10,9 @@ public class IndexController extends SuperController{
     public String hello() {
         return "index";
     }
+
+    @GetMapping("/contacts")
+    public String contacts() {
+        return "contacts";
+    }
 }
