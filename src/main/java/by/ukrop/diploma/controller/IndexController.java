@@ -20,4 +20,9 @@ public class IndexController extends SuperController{
     public String career() {
         return "career";
     }
+
+    @GetMapping("/feedback")
+    public String feedback() {
+        return "feedback";
+    }
 }
