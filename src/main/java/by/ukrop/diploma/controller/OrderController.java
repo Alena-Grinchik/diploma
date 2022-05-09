@@ -15,7 +15,7 @@ public class OrderController extends SuperController{
     @GetMapping("/orderStatus/{id}")
     public String order (@PathVariable("id") Long id, Model model, HttpServletResponse httpResponse) throws IOException {
         Order currentOrder = orderService.getOrder(id);
-        if (currentOrder==null || currentOrder.getStatus().equals("draft")){
+        if (currentOrder==null || currentOrder.isDraft()){
             httpResponse.sendRedirect("/");
             return null;
         }

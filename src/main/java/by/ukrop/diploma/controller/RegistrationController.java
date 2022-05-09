@@ -21,6 +21,9 @@ import java.util.regex.Pattern;
 public class RegistrationController extends SuperController{
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private UserService userService;
 
     @GetMapping("/registration")
@@ -36,8 +39,7 @@ public class RegistrationController extends SuperController{
                                  @RequestParam(value = "password") String password,
                                  @RequestParam(value = "passwordCheck") String passwordCheck,
                                  HttpServletResponse httpResponse,
-                                 Model model,
-                                 PasswordEncoder passwordEncoder
+                                 Model model
 
     ) throws IOException {
         Pattern firstNamePattern = Pattern.compile("^[A-Za-zА-Яа-яёЁ\\- ]+$");
