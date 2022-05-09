@@ -5,6 +5,7 @@ import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.User;
 import by.ukrop.diploma.service.CategoryService;
 import by.ukrop.diploma.service.OrderService;
+import by.ukrop.diploma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ import java.util.List;
 
 @Controller
 public class SuperController {
+
+    @Autowired
+    protected UserService userService;
 
     @Autowired
     protected CategoryService categoryService;

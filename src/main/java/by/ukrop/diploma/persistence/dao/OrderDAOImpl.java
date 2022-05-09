@@ -2,6 +2,7 @@ package by.ukrop.diploma.persistence.dao;
 
 import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.User;
+import by.ukrop.diploma.service.OrderStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -45,7 +46,7 @@ public class OrderDAOImpl implements OrderDAO{
         Root<Order> root = cr.from(Order.class);
 
         Predicate sameUser = cb.equal(root.get("user"), user);
-        Predicate sameStatus = cb.equal(root.get("status"), "draft");
+        Predicate sameStatus = cb.equal(root.get("status"), OrderStatus.DRAFT);
         cr.select(root).where(cb.and(sameUser, sameStatus)).orderBy(cb.desc(root.get("id")));
         Query<Order> query = currentSession.createQuery(cr);
         return query.getResultList().stream().findFirst().orElse(null);

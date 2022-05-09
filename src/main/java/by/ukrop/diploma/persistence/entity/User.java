@@ -43,7 +43,7 @@ public class User implements UserDetails {
     @JoinColumn(name="discount_id", referencedColumnName = "id")
     private Discount discount;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)
     private List <Order> ordersList;
 
     public User() {

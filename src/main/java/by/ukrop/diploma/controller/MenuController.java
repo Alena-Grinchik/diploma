@@ -5,6 +5,7 @@ import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.OrderItem;
 import by.ukrop.diploma.service.DishService;
 import by.ukrop.diploma.service.OrderItemService;
+import by.ukrop.diploma.service.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public class MenuController extends SuperController{
         if (currentCartId==null) {
             Order order = new Order();
             order.setDate(LocalDateTime.now());
-            order.setStatus("draft");
+            order.setStatus(OrderStatus.DRAFT);
             orderId = orderService.addOrder(order);
             session.setAttribute("CurrentCart", orderId);
         } else {

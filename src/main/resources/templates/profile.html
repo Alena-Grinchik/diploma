@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+
+<head>
+    <script src="/js/main.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<section layout:fragment="content">
+<!-- Page Content -->
+<div class="container">
+    <div class="card border-0 shadow my-5 bg-light">
+        <div class="card-body p-5">
+            <div class="container">
+                <div class="pt-1 pb-2 text-center">
+                    <img class="d-block mx-auto mb-4" src="/images/logo_green.svg" width="300">
+                    <h3>Личный кабинет</h3>
+                </div>
+                <ul class="list-unstyled pb-4">
+                    <li th:each="error : ${errors}">
+                        <span class="text-danger fw-bold" th:text="${error}"></span>
+                    </li>
+                </ul>
+                <div class="order-md-1">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="mb-3">Контактная информация</h4>
+                        </div>
+                        <div class="col">
+                        </div>
+                        <div class="col">
+                            <h4 class="mb-3 text-center">Ваша скидка</h4>
+                        </div>
+                    </div>
+                    <form class="needs-validation" method="post" action="/profile" novalidate="">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="firstName">Имя</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" th:value="${currentUser} ? ${currentUser.getFirstName()} : ''" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
+                                    <div class="invalid-feedback">Укажите Ваше имя </div>
+                                </div>
+                                <div>
+                                    <label for="lastName">Фамилия</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" th:value="${currentUser} ? ${currentUser.getLastName()} : ''" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
+                                    <div class="invalid-feedback">Укажите Вашу фамилию </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="phoneNumber">Телефон (в формате "(XX)XXXXXXX")</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">+375</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:value="${currentUser} ? ${currentUser.getPhoneNumber()} : ''" required="" pattern="^(\d{2}|[(]?[0-9]{2}[)])(\d{7})$">
+                                        <div class="invalid-feedback" style="width: 100%;"> Укажите Ваш номер телефона </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" th:value="${currentUser} ? ${currentUser.getEmail()} : ''" required="">
+                                    <div class="invalid-feedback">Укажите Ваш email </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <p class="fs-3 text-center text-success fw-bolder" th:text="${currentUser.getDiscount().getValue()}+ '%'"></p>
+                                <p class="fs-5 text-center">Сделайте еще 5 заказов, чтобы увеличить скидку!</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                <button class="btn btn-primary shadow btn-lg btn-block" type="submit">Сохранить</button>
+                            </div>
+                        </div>
+                    </form>
+                    <hr class="mb-4">
+                    <div class="pt-1 pb-2 text-center">
+                        <h3>История заказов</h3>
+                    </div>
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item" th:each="order, iterStat : ${currentUser.getOrdersList()}" th:if="${!order.isDraft()}">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" th:attr="data-bs-target='#order-'+${order.getId()}" data-bs-toggle="collapse" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <span th:text="'Заказ №'+ ${order.getId()}+' К оплате '+ ${#numbers.formatDecimal(order.orderTotal(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                                </button>
+                            </h2>
+                            <div th:id="'order-'+${order.getId()}" class="accordion-collapse collapse" th:attrappend="class=${iterStat.first ? ' show' : ''}" aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body">
+                                    <div class="card border-white mb-0">
+                                        <div class="card-body p-4 pb-0">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <p class="mb-4 pb-0 lead">Фото</p>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <p class="mb-4 pb-0 lead">Наименование</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <p class="mb-4 pb-0 lead">Описание</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <p class="mb-4 pb-0 lead">Количество</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <p class="mb-4 pb-0 lead">Цена</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <p class="mb-4 pb-0 lead">Итог</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow mb-4" th:each="orderItem : ${order.getOrderItemsList()}">
+                                        <div class="card-body p-4">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-2">
+                                                    <img th:attr="src=${orderItem.getDish().getImage()}" class="img-fluid">
+                                                </div>
+                                                <div class="col-md-2 d-flex ">
+                                                    <div>
+                                                        <p class="lead fw-normal mb-0" th:text="${orderItem.getDish().getName()}"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <p class="small text-muted fw-normal mb-0" th:text="${orderItem.getDish().getDescription()}"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div class="d-flex flex-row">
+                                                        <form class="updateOrderItemQuantityForm" action="/updateQuantity" method="post">
+                                                            <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
+                                                            <input type="hidden" name="delta" value="-1">
+                                                            <button class="btn btn-link px-2">
+                                                                <i class="fas fa-minus"></i>
+                                                            </button>
+                                                        </form>
+                                                        <p class="lead fw-normal mb-0 px-2" th:text="${orderItem.getQuantity()}"></p>
+                                                        <form class="updateOrderItemQuantityForm" action="/updateQuantity" method="post">
+                                                            <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
+                                                            <input type="hidden" name="delta" value="1">
+                                                            <button class="btn btn-link px-2">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <p class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2 d-flex justify-content-center">
+                                                    <div>
+                                                        <span class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                                                        <form class="removeItemForm" action="/removeItem" method="post">
+                                                            <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
+                                                            <button class="btn btn-link px-2 ms-1 float-end trash-icon">
+                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</body>
+</html>

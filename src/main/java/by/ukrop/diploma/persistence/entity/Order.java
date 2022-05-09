@@ -1,5 +1,6 @@
 package by.ukrop.diploma.persistence.entity;
 
+import by.ukrop.diploma.service.OrderStatus;
 import by.ukrop.diploma.service.PaymentMethod;
 
 import javax.persistence.*;
@@ -20,7 +21,8 @@ public class Order {
     private User user;
 
     @Column
-    private String status;
+    @Enumerated
+    private OrderStatus status;
 
     @Column
     private LocalDateTime date;
@@ -70,11 +72,11 @@ public class Order {
         this.user = user;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
@@ -169,5 +171,9 @@ public class Order {
           result += item.getDish().getPrice()*item.getQuantity();
         }
         return result;
+    }
+
+    public Boolean isDraft(){
+        return status==OrderStatus.DRAFT;
     }
 }

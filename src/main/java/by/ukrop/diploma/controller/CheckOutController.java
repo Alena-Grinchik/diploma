@@ -4,6 +4,7 @@ import by.ukrop.diploma.persistence.entity.Address;
 import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.User;
 import by.ukrop.diploma.service.AddressService;
+import by.ukrop.diploma.service.OrderStatus;
 import by.ukrop.diploma.service.PaymentMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -129,7 +130,7 @@ public class CheckOutController extends SuperController{
         address.setId(currentAddressId);
         currentOrder.setAddress(address);
 
-        currentOrder.setStatus("verified");
+        currentOrder.setStatus(OrderStatus.SUBMITTED);
         currentOrder.setDate(LocalDateTime.now());
         currentOrder.setEmail(email);
         currentOrder.setFirstName(firstName);
