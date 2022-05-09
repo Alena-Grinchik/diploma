@@ -3,6 +3,8 @@ package by.ukrop.diploma.persistence.dao;
 import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.User;
 
+import java.util.List;
+
 public interface OrderDAO {
     Order getOrder(Long id);
 
@@ -11,4 +13,6 @@ public interface OrderDAO {
     void updateOrder(Order order);
 
     Order getLastUserCart(User user);
+
+    List<Order> ordersInProgress();
 }

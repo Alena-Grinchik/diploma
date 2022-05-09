@@ -82,6 +82,7 @@
                     <hr class="mb-4">
                     <div class="pt-1 pb-2 text-center">
                         <h3>История заказов</h3>
+                        <h4 th:if="${currentUser.getOrdersList().isEmpty()}">У вас еще нет ни одного заказа.</h4>
                     </div>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item" th:each="order, iterStat : ${currentUser.getOrdersList()}" th:if="${not order.isDraft()}">
@@ -144,21 +145,7 @@
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div class="d-flex flex-row">
-                                                        <form class="updateOrderItemQuantityForm" action="/updateQuantity" method="post">
-                                                            <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
-                                                            <input type="hidden" name="delta" value="-1">
-                                                            <button class="btn btn-link px-2">
-                                                                <i class="fas fa-minus"></i>
-                                                            </button>
-                                                        </form>
                                                         <p class="lead fw-normal mb-0 px-2" th:text="${orderItem.getQuantity()}"></p>
-                                                        <form class="updateOrderItemQuantityForm" action="/updateQuantity" method="post">
-                                                            <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
-                                                            <input type="hidden" name="delta" value="1">
-                                                            <button class="btn btn-link px-2">
-                                                                <i class="fas fa-plus"></i>
-                                                            </button>
-                                                        </form>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
@@ -169,12 +156,6 @@
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
                                                         <span class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
-                                                        <form class="removeItemForm" action="/removeItem" method="post">
-                                                            <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
-                                                            <button class="btn btn-link px-2 ms-1 float-end trash-icon">
-                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                            </button>
-                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

@@ -39,7 +39,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().anyRequest().permitAll()
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/mngProfile").hasRole("MANAGER")
+                .antMatchers("/**").permitAll()
                 .and().formLogin().loginPage("/signIn")
                 .defaultSuccessUrl("/").permitAll();
     }

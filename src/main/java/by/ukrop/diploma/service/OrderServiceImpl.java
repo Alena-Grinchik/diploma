@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class OrderServiceImpl implements OrderService{
 
@@ -35,5 +37,11 @@ public class OrderServiceImpl implements OrderService{
     @Transactional
     public Order getLastUserCart(User user) {
         return orderDAO.getLastUserCart(user);
+    }
+
+    @Override
+    @Transactional
+    public List<Order> ordersInProgress() {
+        return orderDAO.ordersInProgress();
     }
 }

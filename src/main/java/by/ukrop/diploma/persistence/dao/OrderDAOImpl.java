@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class OrderDAOImpl implements OrderDAO{
@@ -50,5 +51,19 @@ public class OrderDAOImpl implements OrderDAO{
         cr.select(root).where(cb.and(sameUser, sameStatus)).orderBy(cb.desc(root.get("id")));
         Query<Order> query = currentSession.createQuery(cr);
         return query.getResultList().stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public List<Order> ordersInProgress() {
+        Session currentSession = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = currentSession.getCriteriaBuilder();
+        CriteriaQuery<Order> cr = cb.createQuery(Order.class);
+        Root<Order> root = cr.from(Order.class);
+
+        Predicate sameStatusSubmitted = cb.equal(root.get("status"), OrderStatus.SUBMITTED);
+        Predicate sameStatusApproved = cb.equal(root.get("status"), OrderStatus.APPROVED);
+        cr.select(root).where(cb.or(sameStatusSubmitted, sameStatusApproved)).orderBy(cb.desc(root.get("id")));
+        Query<Order> query = currentSession.createQuery(cr);
+        return query.getResultList();
     }
 }

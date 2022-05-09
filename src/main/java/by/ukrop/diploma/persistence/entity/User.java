@@ -1,13 +1,12 @@
 package by.ukrop.diploma.persistence.entity;
 
 
+import by.ukrop.diploma.service.OrderStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class User implements UserDetails {
@@ -92,7 +91,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(getRole());
     }
 
     public String getPassword() {
@@ -171,5 +170,30 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, password, phoneNumber, address, role, discount, ordersList);
+    }
+
+    public boolean isManager(){
+        return role.getName().equals("manager");
+    }
+
+    public Discount applicableDiscount(){
+        Discount discount = new Discount();
+        int completedOrders = 0;
+        for (Order order: ordersList) {
+            if (order.getStatus()== OrderStatus.DELIVERED){
+                completedOrders+=1;
+            }
+        }
+
+        if (isManager()){
+            discount.setId(4L);
+        }else if (completedOrders < 5){
+            discount.setId(1L);
+        } else if (completedOrders < 10){
+            discount.setId(2L);
+        } else {
+            discount.setId(3L);
+        }
+        return discount;
     }
 }

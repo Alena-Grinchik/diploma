@@ -176,4 +176,12 @@ public class Order {
     public Boolean isDraft(){
         return status==OrderStatus.DRAFT;
     }
+
+    public Boolean isSubmitted(){
+        return status==OrderStatus.SUBMITTED;
+    }
+
+    public Boolean isApproved(){
+        return status==OrderStatus.APPROVED;
+    }
 }

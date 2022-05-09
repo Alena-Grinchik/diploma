@@ -76,7 +76,7 @@ public class RegistrationController extends SuperController{
         role.setId(1L);
         user.setRole(role);
         Discount discount = new Discount();
-        discount.setId(1L);
+        discount.setId(2L);
         user.setDiscount(discount);
 
         try {
