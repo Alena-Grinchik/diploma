@@ -7,24 +7,24 @@
 <div class="container">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h3 class="py-3 text-center">Карьера</h3>
-            <p>Мы растем и расширяемся, нам постоянно нужны рабочие руки. Сами не справляемся, поэтому ищем новых сотрудников. Будем рады принять вас в свой дружный коллектив!</p>
-            <p>На данный момент у нас открыты 2 вакансии:</p>
+            <h3 class="py-3 text-center" th:text="#{title.career}"></h3>
+            <p th:text="#{career.p1}"></p>
+            <p th:text="#{career.p2}"></p>
 
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
                     <div class="card h-100 shadow">
                         <div class="card-body">
-                            <h5 class="card-title">Уборщица</h5>
-                            <p class="card-text">На эту позицию мы ищем трудолюбивую женщину от 20 до 60 лет.</p><p>В задачи сотрудника будет входить уборка помещений: зала, кухни и склада. Также нужно следить за чистотой столов и мебели.</p><p>График работы: 2/2, с 10:00 до 23:00. Гарантируем полную и своевременную оплату труда. Работаем официально, по ТК РБ. Опыт не требуется, платим 1000 рублей в первый месяц, в последующие — 1300.</p><p>По вопросам трудоустройства звоните сюда: +375 25 168-48-48 (Ольга).</p>
+                            <h5 class="card-title" th:text="#{career.vacancy1.title}"></h5>
+                            <p class="card-text" th:utext="#{career.vacancy1.text}"></p>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card h-100 shadow">
                         <div class="card-body">
-                            <h5 class="card-title">Официант</h5>
-                            <p class="card-text">Рассмотрим соискателей от 20 до 60 лет, можно без опыта.</p><p>Обязанности: принимать заказы, уведомлять поваров о них, разносить еду.</p><p>График работы: 2/2, с 10:00 до 23:00. Официальное трудоустройство, платим 1200 рублей в первый месяц и по 1500 в последующие.</p><p>По вопросам трудоустройства звоните сюда: +375 25 168-48-48 (Ольга).</p>
+                            <h5 class="card-title" th:text="#{career.vacancy2.title}"></h5>
+                            <p class="card-text" th:utext="#{career.vacancy2.text}"></p>
                         </div>
                     </div>
                 </div>

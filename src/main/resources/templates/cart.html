@@ -12,36 +12,36 @@
                 <div class="container h-100">
                     <div class="row d-flex justify-content-center h-100">
                         <div class="col">
-                            <p class="mt-3"><span class="h4" th:text="'Товаров в корзине: '+${currentOrderSize}"></span></p>
+                            <p class="mt-3"><span class="h4" th:text="#{cart.incart} + ' ' +${currentOrderSize}"></span></p>
                             <div class="card border-white mb-0">
                                 <div class="card-body p-4 pb-0">
                                     <div class="row align-items-center">
                                         <div class="col-md-2 d-flex justify-content-center">
-                                            <p class="mb-4 pb-0 lead">Фото</p>
+                                            <p class="mb-4 pb-0 lead" th:text="#{forms.photo.title}"></p>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center">
                                             <div>
-                                                <p class="mb-4 pb-0 lead">Наименование</p>
+                                                <p class="mb-4 pb-0 lead" th:text="#{forms.name.title}"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center">
                                             <div>
-                                                <p class="mb-4 pb-0 lead">Описание</p>
+                                                <p class="mb-4 pb-0 lead" th:text="#{forms.description.title}"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center">
                                             <div>
-                                                <p class="mb-4 pb-0 lead">Количество</p>
+                                                <p class="mb-4 pb-0 lead" th:text="#{forms.quantity.title}"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center">
                                             <div>
-                                                <p class="mb-4 pb-0 lead">Цена</p>
+                                                <p class="mb-4 pb-0 lead" th:text="#{forms.price.title}"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center">
                                             <div>
-                                                <p class="mb-4 pb-0 lead">Итог</p>
+                                                <p class="mb-4 pb-0 lead" th:text="#{forms.total.title}"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -84,12 +84,12 @@
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center">
                                             <div>
-                                                <p class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></p>
+                                                <p class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex justify-content-center">
                                             <div>
-                                                <span class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                                                <span class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></span>
                                                 <form class="removeItemForm" action="/removeItem" method="post">
                                                     <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
                                                     <button class="btn btn-link px-2 ms-1 float-end trash-icon">
@@ -106,14 +106,14 @@
 
                                     <div class="float-end">
                                         <p class="mb-0 me-5 d-flex align-items-center">
-                                            <span class="small text-muted me-2">Итого заказ:</span> <span class="lead fw-normal" th:text="${#numbers.formatDecimal(currentOrder.orderTotal(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                                            <span class="small text-muted me-2" th:text="#{cart.total}"></span> <span class="lead fw-normal" th:text="${#numbers.formatDecimal(currentOrder.orderTotal(), 0, 'COMMA', 2, 'POINT')}+ ' ' + #{general.rub}"></span>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a href="/menu" class="btn btn-outline-success btn-secondary shadow me-4">Вернуться в меню</a>
-                                <a class="btn btn-outline-success shadow" href="/checkOut" role="button">Оформить заказ</a>
+                                <a href="/menu" class="btn btn-outline-success btn-secondary shadow me-4" th:text="#{buttons.menu}"></a>
+                                <a class="btn btn-outline-success shadow" href="/checkOut" role="button" th:text="#{buttons.checkout}"></a>
                             </div>
                         </div>
                     </div>

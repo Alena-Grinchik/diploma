@@ -1,5 +1,6 @@
 package by.ukrop.diploma.controller;
 
+import by.ukrop.diploma.Translator;
 import by.ukrop.diploma.persistence.entity.Discount;
 import by.ukrop.diploma.persistence.entity.Role;
 import by.ukrop.diploma.persistence.entity.User;
@@ -49,20 +50,20 @@ public class RegistrationController extends SuperController{
         List<String> errors = new ArrayList<>();
 
         if (!firstNamePattern.matcher(firstName).matches()){
-            errors.add("Проверьте правильность введенного имени");
+            errors.add(Translator.toLocale("validation.firstname"));
         }
         if (!lastNamePattern.matcher(lastName).matches()){
-            errors.add("Проверьте правильность введенной фамилии");
+            errors.add(Translator.toLocale("validation.lastname"));
         }
         if (!phoneNumberPattern.matcher(phoneNumber).matches()){
-            errors.add("Проверьте правильность введенного номера телефона");
+            errors.add(Translator.toLocale("validation.phone"));
         }
         if (!emailPattern.matcher(email).matches()){
-            errors.add("Проверьте правильность введенного email");
+            errors.add(Translator.toLocale("validation.email"));
         }
         if (!password.equals(passwordCheck) ||
                 password.length() < 8){
-            errors.add("Пароль слишком короткий или не совпадает");
+            errors.add(Translator.toLocale("validation.passwordmissmatch"));
         }
 
         User user = new User();
@@ -82,7 +83,7 @@ public class RegistrationController extends SuperController{
         try {
             userService.addUser(user);
         } catch (Exception e) {
-            errors.add("Пользователь с таким email уже существует");
+            errors.add(Translator.toLocale("validation.useralreadyexists"));
         }
 
         if (!errors.isEmpty()) {

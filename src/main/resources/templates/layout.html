@@ -14,7 +14,7 @@
 <body class="d-flex flex-column min-vh-100">
 <nav class="navbar sticky-top navbar-expand-lg navbar-light shadow rounded">
     <div class="container-fluid">
-        <a class="navbar-brand position-absolute" href="/"><img class="logo" src="/images/logo_white.svg" width="85"  title="На главную"></a>
+        <a class="navbar-brand position-absolute" href="/"><img class="logo" src="/images/logo_white.svg" width="85" th:title="#{navbar.main.title}"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,23 +22,22 @@
             <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0" style="padding-left: 300px">
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Меню
-                    </a>
+                    <a class="nav-link dropdown-toggle fw-bolder" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" th:text="#{navbar.menu.menu}"></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li th:each="category : ${categories}"><a class="dropdown-item" th:attr="href='/menu#'+${category.getAnchorName()}" th:text="${category.name}"></a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bolder" href="/delivery">Способы доставки</a>
+                    <a class="nav-link fw-bolder" href="/delivery" th:text="#{navbar.menu.delivery}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bolder" href="/feedback">Отзывы</a>
+                    <a class="nav-link fw-bolder" href="/feedback" th:text="#{navbar.menu.feedback}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bolder" href="/career">Карьера</a>
+                    <a class="nav-link fw-bolder" href="/career" th:text="#{navbar.menu.career}"></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bolder" aria-current="page" href="/contacts">Контакты</a>
+                    <a class="nav-link fw-bolder" aria-current="page" href="/contacts" th:text="#{navbar.menu.contacts}"></a>
                 </li>
             </ul>
             <div class="d-flex flex-row-reverse" style="width: 300px">
@@ -52,10 +51,10 @@
                     </ul>
                 </div>
                <a href="/signIn" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6" th:unless="${currentUser}">
-                    <i class="fa fa-sign-in" aria-hidden="true"></i> Войти
+                    <i class="fa fa-sign-in me-1" aria-hidden="true"></i><span th:text="#{navbar.sign_in}"></span>
                 </a>
                 <a href="/profile" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6" th:if="${currentUser}">
-                    <i class="fa fa-user" aria-hidden="true"></i> Профиль
+                    <i class="fa fa-user" aria-hidden="true"></i> <span th:text="#{navbar.profile}"></span>
                 </a>
                 <a href="/cart" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6">
                     <i th:attr="data-count=${currentOrderSize}" class="fa fa-shopping-cart cart-badge"></i>
@@ -71,7 +70,7 @@
 <footer class="text-center text-lg-start bg-dark text-muted mt-auto">
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2022 <span class="fw-bold">Вегетарианское кафе высокой кухни «Укроп»</span>
+        <span class="me-1">© 2022</span> <span class="fw-bold" th:text="#{footer.copyright}"></span>
     </div>
     <!-- Copyright -->
 </footer>

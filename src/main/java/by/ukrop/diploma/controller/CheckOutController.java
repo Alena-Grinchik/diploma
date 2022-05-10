@@ -1,5 +1,6 @@
 package by.ukrop.diploma.controller;
 
+import by.ukrop.diploma.Translator;
 import by.ukrop.diploma.persistence.entity.Address;
 import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.User;
@@ -75,31 +76,31 @@ public class CheckOutController extends SuperController{
         List<String> errors = new ArrayList<>();
 
         if (!firstNamePattern.matcher(firstName).matches()){
-            errors.add("Проверьте правильность введенного имени");
+            errors.add(Translator.toLocale("validation.firstname"));
         }
         if (!lastNamePattern.matcher(lastName).matches()){
-            errors.add("Проверьте правильность введенной фамилии");
+            errors.add(Translator.toLocale("validation.lastname"));
         }
         if (!phoneNumberPattern.matcher(phoneNumber).matches()){
-            errors.add("Проверьте правильность введенного номера телефона");
+            errors.add(Translator.toLocale("validation.phone"));
         }
         if (!emailPattern.matcher(email).matches()){
-            errors.add("Проверьте правильность введенного email");
+            errors.add(Translator.toLocale("validation.email"));
         }
         if (!streetPattern.matcher(street).matches()){
-            errors.add("Проверьте правильность введенного названия улицы");
+            errors.add(Translator.toLocale("validation.street"));
         }
         if (!buildingPattern.matcher(building).matches()){
-            errors.add("Проверьте правильность введенного номера дома");
+            errors.add(Translator.toLocale("validation.building"));
         }
         if (!entrancePattern.matcher(entrance).matches()){
-            errors.add("Проверьте правильность введенного номера подъезда");
+            errors.add(Translator.toLocale("validation.entrance"));
         }
         if (!apartmentPattern.matcher(apartment).matches()){
-            errors.add("Проверьте правильность введенного номера квартиры/офиса");
+            errors.add(Translator.toLocale("validation.apartment"));
         }
         if (!(paymentMethod != null && (paymentMethod.equals("cash") || paymentMethod.equals("card")))){
-            errors.add("Проверьте правильность введенного названия улицы");
+            errors.add(Translator.toLocale("validation.paymentmethod"));
         }
 
         if (!errors.isEmpty()) {

@@ -24,11 +24,11 @@
                         </div>
                         <div class="card-footer bg-transparent border-white">
                            <strong class="card-text fs-4 ">
-                               <span th:text="${#numbers.formatDecimal(dish.price, 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                               <span th:text="${#numbers.formatDecimal(dish.price, 0, 'COMMA', 2, 'POINT')}+' '+ #{general.rub}"></span>
                            </strong>
                             <form class="addItemForm" action="/addItem" method="post">
                                 <input type="hidden" name="dishId" th:value="${dish.id}">
-                                <button type="submit" class="btn btn-outline-success float-end">В корзину</button>
+                                <button type="submit" class="btn btn-outline-success float-end" th:text="#{menu.addtocart}"></button>
                             </form>
                         </div>
                     </div>

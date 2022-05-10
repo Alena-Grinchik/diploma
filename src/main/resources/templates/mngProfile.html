@@ -15,17 +15,17 @@
             <div class="container">
                 <div class="pt-1 pb-2 text-center">
                     <img class="d-block mx-auto mb-4" src="/images/logo_green.svg" width="300">
-                    <h3>Кабинет менеджера</h3>
+                    <h3 th:text="#{mng.title}"></h3>
                     <hr class="mb-4">
                 </div>
                     <div class="pt-1 pb-2 text-center">
-                        <h3>Список текущих заказов</h3>
+                        <h3 th:text="#{mng.list.title}"></h3>
                     </div>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item" th:each="order, iterStat : ${ordersInProgress}">
                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                 <button class="accordion-button" type="button" th:attr="data-bs-target='#order-'+${order.getId()}" data-bs-toggle="collapse" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                <span th:text="'Заказ №'+ ${order.getId()}+' К оплате '+ ${#numbers.formatDecimal(order.orderTotal(), 0, 'COMMA', 2, 'POINT')}+' '+'руб, статус: '+ ${order.isSubmitted() ? 'Сформирован' : 'Подтвержден'} "></span>
+                                <span th:text="#{mng.order.header.p1} + ${order.getId()} + ' ' + #{mng.order.header.p2} + ' ' + ${#numbers.formatDecimal(order.orderTotal(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub} + ', ' + #{mng.order.header.p3} + ': ' + ${order.isSubmitted() ? #{mng.order.header.p4}: #{mng.order.header.p5}}"></span>
                                 </button>
                             </h2>
                             <div th:id="'order-'+${order.getId()}" class="accordion-collapse collapse" th:attrappend="class=${iterStat.first ? ' show' : ''}" aria-labelledby="panelsStayOpen-headingOne">
@@ -33,111 +33,111 @@
                                     <div class="card border-white mb-0">
                                         <div class="card-body p-4 pb-0">
                                             <div class="col-md-8 order-md-1">
-                                                <h4 class="mb-3">Контактная информация</h4>
+                                                <h4 class="mb-3" th:text="#{forms.contacts.title}"></h4>
                                                 <form class="needs-validation d-inline" method="post" action="/checkOut" novalidate="">
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
-                                                            <label for="firstName">Имя</label>
+                                                            <label for="firstName" th:text="#{forms.firstname.label}"></label>
                                                             <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" th:value="${order.getFirstName()}" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
-                                                            <div class="invalid-feedback">Укажите Ваше имя </div>
+                                                            <div class="invalid-feedback" th:text="#{forms.firstname.error}"></div>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
-                                                            <label for="lastName">Фамилия</label>
+                                                            <label for="lastName" th:text="#{forms.lastname.label}"></label>
                                                             <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" th:value="${order.getLastName()}" required="" pattern="^[A-Za-zА-Яа-яёЁ\- ]+$">
-                                                            <div class="invalid-feedback">Укажите Вашу фамилию </div>
+                                                            <div class="invalid-feedback" th:text="#{forms.lastname.error}"></div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="phoneNumber">Телефон (в формате "(XX)XXXXXXX")</label>
+                                                        <label for="phoneNumber" th:text="#{forms.phone.label}"></label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">+375</span>
                                                             </div>
                                                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:value="${order.getPhoneNumber()}" required="" pattern="^(\d{2}|[(]?[0-9]{2}[)])(\d{7})$">
-                                                            <div class="invalid-feedback" style="width: 100%;"> Укажите Ваш номер телефона </div>
+                                                            <div class="invalid-feedback" style="width: 100%;" th:text="#{forms.phone.error}"></div>
                                                         </div>
                                                     </div>
                                                     <hr class="mb-4">
-                                                    <h4 class="mb-3">Адрес доставки</h4>
+                                                    <h4 class="mb-3" th:text="#{forms.address.title}"></h4>
                                                     <div class="row">
                                                         <div class="col-md-5 mb-3">
-                                                            <label for="street">Улица</label>
+                                                            <label for="street" th:text="#{forms.street.label}"></label>
                                                             <input type="text" class="form-control" id="street" name="street" th:value="${order.getAddress().getStreet()}" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ\- .]+$">
-                                                            <div class="invalid-feedback">Введите название улицы</div>
+                                                            <div class="invalid-feedback" th:text="#{forms.street.error}"></div>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
-                                                            <label for="building">Дом</label>
+                                                            <label for="building" th:text="#{forms.building.label}"></label>
                                                             <input type="text" class="form-control" id="building" name="building" th:value="${order.getAddress().getBuilding()}" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ\- .]+$">
-                                                            <div class="invalid-feedback">Введите номер дома</div>
+                                                            <div class="invalid-feedback" th:text="#{forms.building.error}"></div>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
-                                                            <label for="enclosure">Корпуc</label>
+                                                            <label for="enclosure" th:text="#{forms.enclosure.label}"></label>
                                                             <input type="text" class="form-control" id="enclosure" name="enclosure" th:value="${order.getAddress().getEnclosure()}">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-3 mb-3">
-                                                            <label for="entrance">Подъезд</label>
+                                                            <label for="entrance" th:text="#{forms.entrance.label}"></label>
                                                             <input type="text" class="form-control" id="entrance" name="entrance" th:value="${order.getAddress().getEntrance()}" required="" pattern="^[0-9A-Za-zА-Яа-яёЁ]+$">
-                                                            <div class="invalid-feedback">Введите номер подъезда</div>
+                                                            <div class="invalid-feedback" th:text="#{forms.entrance.error}"></div>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
-                                                            <label for="apartment">Квартира/Офис</label>
+                                                            <label for="apartment" th:text="#{forms.apartment.label}"></label>
                                                             <input type="text" class="form-control" id="apartment" name="apartment" th:value="${order.getAddress().getApartment()}" required="" pattern="^[0-9]+$">
-                                                            <div class="invalid-feedback">Введите номер квартиры</div>
+                                                            <div class="invalid-feedback" th:text="#{forms.apartment.error}"></div>
                                                         </div>
                                                         <div class="col-md-2 mb-3">
-                                                            <label for="floor">Этаж</label>
+                                                            <label for="floor" th:text="#{forms.floor.label}"></label>
                                                             <input type="text" class="form-control" id="floor" name="floor" th:value="${order.getAddress().getFloor()}">
                                                         </div>
                                                         <div class="col-md-3 mb-3">
-                                                            <label for="code">Код подъезда</label>
+                                                            <label for="code" th:text="#{forms.code.label}"></label>
                                                             <input type="text" class="form-control" id="code" name="code" th:value="${order.getAddress().getCode()}">
                                                         </div>
                                                     </div>
                                                     <hr class="mb-4">
-                                                    <h4 class="mb-3">Комментарии</h4>
+                                                    <h4 class="mb-3" th:text="#{forms.comment.title}"></h4>
                                                     <div class="form-floating">
-                                                        <textarea class="form-control" th:value="${order.getOrderComment()}" placeholder="Оставьте Ваш комментарий к заказу" id="orderComment" name="orderComment" style="height: 100px"></textarea>
-                                                        <label for="orderComment">Оставьте Ваш комментарий к заказу</label>
+                                                        <textarea class="form-control" th:value="${order.getOrderComment()}" id="orderComment" name="orderComment" style="height: 100px"></textarea>
+                                                        <label for="orderComment" th:text="#{forms.comment.label}"></label>
                                                     </div>
                                                     <hr class="mb-4">
-                                                    <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit">Сохранить изменения</button>
+                                                    <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit" th:text="#{buttons.save}"></button>
                                                 </form>
                                                 <form class="d-inline">
-                                                    <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit">Подтвердить</button>
+                                                    <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit" th:text="#{buttons.verify}"></button>
                                                 </form>
                                                 <form class="d-inline">
-                                                    <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit">Доставлен</button>
+                                                    <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit" th:text="#{buttons.deliver}"></button>
                                                 </form>
                                             </div>
                                             <div class="row align-items-center mt-5">
                                                 <div class="col-md-2 d-flex justify-content-center">
-                                                    <p class="mb-4 pb-0 lead">Фото</p>
+                                                    <p class="mb-4 pb-0 lead" th:text="#{forms.photo.title}"></p>
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
-                                                        <p class="mb-4 pb-0 lead">Наименование</p>
+                                                        <p class="mb-4 pb-0 lead" th:text="#{forms.name.title}"></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
-                                                        <p class="mb-4 pb-0 lead">Описание</p>
+                                                        <p class="mb-4 pb-0 lead" th:text="#{forms.description.title}"></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
-                                                        <p class="mb-4 pb-0 lead">Количество</p>
+                                                        <p class="mb-4 pb-0 lead" th:text="#{forms.quantity.title}"></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
-                                                        <p class="mb-4 pb-0 lead">Цена</p>
+                                                        <p class="mb-4 pb-0 lead" th:text="#{forms.price.title}"></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
-                                                        <p class="mb-4 pb-0 lead">Итог</p>
+                                                        <p class="mb-4 pb-0 lead" th:text="#{forms.total.title}"></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,12 +180,12 @@
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
-                                                        <p class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></p>
+                                                        <p class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
-                                                        <span class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')}+' '+'руб'"></span>
+                                                        <span class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></span>
                                                         <form class="removeItemForm" action="/removeItem" method="post">
                                                             <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
                                                             <button class="btn btn-link px-2 ms-1 float-end trash-icon">

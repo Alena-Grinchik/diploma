@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserDetailsService, UserService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        User userByEmail = userDAO.getUserByEmail(username);
        if (userByEmail==null) {
-           throw new UsernameNotFoundException("Пользователь не зарегистрирован");
+           throw new UsernameNotFoundException("User is not registered");
        } else {
            return userByEmail;
        }
