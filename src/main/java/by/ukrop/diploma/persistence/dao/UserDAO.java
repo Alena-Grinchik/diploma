@@ -2,6 +2,8 @@ package by.ukrop.diploma.persistence.dao;
 
 import by.ukrop.diploma.persistence.entity.User;
 
+import java.util.List;
+
 public interface UserDAO {
     Long addUser (User user);
 
@@ -11,5 +13,5 @@ public interface UserDAO {
 
     User getUserByEmail(String email);
 
-
+    List<User> getAllUsers();
 }

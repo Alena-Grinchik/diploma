@@ -39,6 +39,12 @@
                 <li class="nav-item">
                     <a class="nav-link fw-bolder" aria-current="page" href="/contacts" th:text="#{navbar.menu.contacts}"></a>
                 </li>
+                <li class="nav-item" th:if="${currentUser!=null && currentUser.isManager()}">
+                    <a class="nav-link fw-bolder" aria-current="page" href="/mngProfile" th:text="#{navbar.menu.mng}"></a>
+                </li>
+                <li class="nav-item" th:if="${currentUser!=null && currentUser.isAdmin()}">
+                    <a class="nav-link fw-bolder" aria-current="page" href="/adminProfile" th:text="#{navbar.menu.admin}"></a>
+                </li>
             </ul>
             <div class="d-flex flex-row-reverse" style="width: 300px">
                 <div class="btn-group">
@@ -50,13 +56,19 @@
                         <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-gb pe-1"></span> English</a></li>
                     </ul>
                 </div>
-               <a href="/signIn" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6" th:unless="${currentUser}">
-                    <i class="fa fa-sign-in me-1" aria-hidden="true"></i><span th:text="#{navbar.sign_in}"></span>
-                </a>
-                <a href="/profile" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6" th:if="${currentUser}">
-                    <i class="fa fa-user" aria-hidden="true"></i> <span th:text="#{navbar.profile}"></span>
-                </a>
-                <a href="/cart" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6">
+                <div class="btn-group">
+                    <a href="/signIn" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6" th:unless="${currentUser}">
+                        <i class="fa fa-sign-in me-1" aria-hidden="true"></i><span th:text="#{navbar.sign_in}"></span>
+                    </a>
+                    <a href="/profile" class="btn btn-sm dropdown-toggle bg-transparent btn-no-outline fs-6" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                       th:if="${currentUser}" th:text="#{navbar.profile}">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" th:if="${currentUser}">
+                        <li><a class="dropdown-item" href="/profile" th:text="#{navbar.profile}"></a></li>
+                        <li><a class="dropdown-item" href="/logout" th:text="#{navbar.logout}"></a></li>
+                    </ul>
+                </div>
+                    <a href="/cart" class="btn btn-sm bg-transparent btn-no-outline me-3 fs-6">
                     <i th:attr="data-count=${currentOrderSize}" class="fa fa-shopping-cart cart-badge"></i>
                 </a>
             </div>

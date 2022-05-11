@@ -173,7 +173,15 @@ public class User implements UserDetails {
     }
 
     public boolean isManager(){
-        return role.getName().equals("manager");
+        return role.getName().equals("ROLE_MANAGER");
+    }
+
+    public boolean isAdmin(){
+        return role.getName().equals("ROLE_ADMIN");
+    }
+
+    public boolean isUser(){
+        return role.getName().equals("ROLE_USER");
     }
 
     public Discount applicableDiscount(){

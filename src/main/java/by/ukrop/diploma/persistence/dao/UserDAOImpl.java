@@ -1,5 +1,6 @@
 package by.ukrop.diploma.persistence.dao;
 
+import by.ukrop.diploma.persistence.entity.Category;
 import by.ukrop.diploma.persistence.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class UserDAOImpl implements UserDAO{
@@ -47,5 +49,16 @@ public class UserDAOImpl implements UserDAO{
         cr.select(root).where(sameEmail);
         Query<User> query = currentSession.createQuery(cr);
         return query.getResultList().stream().findFirst().orElse(null);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery <User> cq = cb.createQuery(User.class);
+        Root <User> root = cq.from(User.class);
+        cq.select(root);
+        javax.persistence.Query query = session.createQuery(cq);
+        return query.getResultList();
     }
 }

@@ -25,7 +25,7 @@
                         <div class="accordion-item" th:each="order, iterStat : ${ordersInProgress}">
                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                 <button class="accordion-button" type="button" th:attr="data-bs-target='#order-'+${order.getId()}" data-bs-toggle="collapse" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                <span th:text="#{mng.order.header.p1} + ${order.getId()} + ' ' + #{mng.order.header.p2} + ' ' + ${#numbers.formatDecimal(order.orderTotal(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub} + ', ' + #{mng.order.header.p3} + ': ' + ${order.isSubmitted() ? #{mng.order.header.p4}: #{mng.order.header.p5}}"></span>
+                                <span th:text="#{mng.order.header.p1} + ${order.getId()} + ' ' + #{mng.order.header.p2} + ' ' + ${#numbers.formatDecimal(order.orderTotal(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub} + ', ' + #{mng.order.header.p3} + ': ' + (${order.isSubmitted()} ? #{mng.order.header.p4}: #{mng.order.header.p5})"></span>
                                 </button>
                             </h2>
                             <div th:id="'order-'+${order.getId()}" class="accordion-collapse collapse" th:attrappend="class=${iterStat.first ? ' show' : ''}" aria-labelledby="panelsStayOpen-headingOne">
