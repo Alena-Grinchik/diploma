@@ -85,7 +85,7 @@
                         <h4 th:if="${currentUser.getOrdersList().isEmpty()}" th:text="#{profile.history.noorders}"></h4>
                     </div>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <div class="accordion-item" th:each="order, iterStat : ${currentUser.getOrdersList()}" th:if="${not order.isDraft()}">
+                        <div class="accordion-item" th:each="orderIndex, iterStat : ${#numbers.sequence(currentUser.getOrdersList().size() - 1, 0, -1)}" th:with="order=${currentUser.getOrdersList().get(orderIndex)}" th:if="${not currentUser.getOrdersList().get(orderIndex).isDraft()}">
                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                                 <button class="accordion-button" type="button" th:attr="data-bs-target='#order-'+${order.getId()}" data-bs-toggle="collapse" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                 <span th:text="#{profile.order.header.p1} + ${order.getId()}+ ' ' + #{profile.order.header.p2} + ' ' + ${#numbers.formatDecimal(order.orderTotal(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></span>
