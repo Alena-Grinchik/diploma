@@ -12,37 +12,38 @@
                 <h3 class="py-3 text-center" th:text="#{title.additem}"></h3>
             </div>
             <form action="/addItem" class="needs-validation" novalidate="" method="post">
+                <input type="hidden" name="dishId" th:unless="${dish == null}" th:value="${dish.getId()}">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="dishNameRu">Название блюда</label>
-                        <input type="text" class="form-control" id="dishNameRu" name="dishNameRu" placeholder="" value="" required="" pattern="^[0-9А-Яа-яёЁ\- ()!?,:]+$">
+                        <input type="text" class="form-control" id="dishNameRu" name="dishNameRu" placeholder="" th:value="${dish == null}? '' : ${dish.getName()}" required="" pattern="^[0-9А-Яа-яёЁ\- ()!?,:]+$">
                         <div class="invalid-feedback" th:text="#{forms.dish.name.error}"></div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="dishNameEng">Dish name</label>
-                        <input type="text" class="form-control" id="dishNameEng" name="dishNameEng" placeholder="" value="" required="" pattern="^[0-9A-Za-z\- ()!?,:]+$">
+                        <input type="text" class="form-control" id="dishNameEng" name="dishNameEng" placeholder="" th:value="${dish == null}? '' : ${dish.getName()}" required="" pattern="^[0-9A-Za-z\- ()!?,:]+$">
                         <div class="invalid-feedback" th:text="#{forms.dish.name.error}"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="dishDescriptionRu">Описание</label>
-                        <textarea type="text" class="form-control" id="dishDescriptionRu" name="dishDescriptionRu" placeholder="" value="" required=""></textarea>
+                        <textarea type="text" class="form-control" id="dishDescriptionRu" name="dishDescriptionRu" placeholder="" th:text="${dish == null}? '' : ${dish.getDescription()}" required=""></textarea>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="dishDescriptionEng">Description</label>
-                        <textarea type="text" class="form-control" id="dishDescriptionEng" name="dishDescriptionEng" placeholder="" value="" required=""></textarea>
+                        <textarea type="text" class="form-control" id="dishDescriptionEng" name="dishDescriptionEng" placeholder="" th:text="${dish == null}? '' : ${dish.getDescription()}" required=""></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-8 mb-3">
                         <label for="dishUrl" th:text="#{forms.dish.url.label}"></label>
-                        <input type="url" class="form-control" id="dishUrl" name="dishUrl" placeholder="" value="" required="">
+                        <input type="url" class="form-control" id="dishUrl" name="dishUrl" placeholder="" th:value="${dish == null}? '' : ${dish.getImage()}" required="">
                         <div class="invalid-feedback" th:text="#{forms.dish.url.error}"></div>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="dishPrice" th:text="#{forms.dish.price.label}"></label>
-                        <input type="text" class="form-control" id="dishPrice" name="dishPrice" placeholder="" value="" required="" pattern="^\d+(\.\d{2})?$">
+                        <input type="text" class="form-control" id="dishPrice" name="dishPrice" placeholder="" th:value="${dish == null}? '' : ${dish.getPrice()}" required="" pattern="^\d+(\.\d{2})?$">
                         <div class="invalid-feedback" th:text="#{forms.dish.price.error}"></div>
                     </div>
                     <div class="col-md-2 mb-3">
