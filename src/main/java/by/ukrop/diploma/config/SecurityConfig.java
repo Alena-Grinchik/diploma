@@ -41,7 +41,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/mngProfile").hasRole("MANAGER")
-                .antMatchers("/adminProfile").hasRole("ADMIN")
+                .antMatchers("/adminProfile","/addItem").hasRole("ADMIN")
                 .antMatchers("/**").permitAll()
                 .and().formLogin().loginPage("/signIn").defaultSuccessUrl("/").permitAll()
                 .and().logout(logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/"));
