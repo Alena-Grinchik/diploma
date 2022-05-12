@@ -53,7 +53,8 @@ public class SuperController {
     @ModelAttribute("currentUser")
     public User getCurrentUser(Authentication authentication, HttpServletRequest request) {
         if (authentication != null) {
-            User user = (User) authentication.getPrincipal();
+            User userAuth = (User) authentication.getPrincipal();
+            User user = userService.getUser(userAuth.getId());
             HttpSession session = request.getSession(true);
             Long currentCartId = (Long) session.getAttribute("CurrentCart");
 
