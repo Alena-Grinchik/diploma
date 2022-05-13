@@ -30,7 +30,8 @@
                                         <div class="card-body p-4 pb-0">
                                             <div class="col-md-8 order-md-1">
                                                 <h4 class="mb-3" th:text="#{forms.contacts.title}"></h4>
-                                                <form class="needs-validation d-inline" method="post" action="/checkOut" novalidate="">
+                                                <form class="needs-validation d-inline" method="post" action="/changeUser" novalidate="">
+                                                    <input type="hidden" name="userId" th:value="${user.getId()}">
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label for="firstName" th:text="#{forms.firstname.label}"></label>
@@ -55,8 +56,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-md-6">
-                                                            <label for="roleName" th:text="#{forms.role.label}"></label>
-                                                            <select class="form-select" id="roleName" name="roleName">
+                                                            <label for="roleId" th:text="#{forms.role.label}"></label>
+                                                            <select class="form-select" id="roleId" name="roleId">
                                                                 <option value="1" th:selected="${user.isUser()}" th:text="#{forms.role.user}"></option>
                                                                 <option value="3" th:selected="${user.isManager()}" th:text="#{forms.role.manager}"></option>
                                                                 <option value="2" th:selected="${user.isAdmin()}" th:text="#{forms.role.admin}"></option>
