@@ -49,12 +49,15 @@
             </ul>
             <div class="d-flex flex-row-reverse" style="width: 300px">
                 <div class="btn-group">
-                    <button class="btn btn-sm dropdown-toggle bg-transparent btn-no-outline" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-sm dropdown-toggle bg-transparent btn-no-outline" type="button" data-bs-toggle="dropdown" aria-expanded="false" th:if="${#locale.getLanguage()} == 'ru'">
                         <span class="flag-icon flag-icon-ru pe-1"></span> RU
                     </button>
+                    <button class="btn btn-sm dropdown-toggle bg-transparent btn-no-outline" type="button" data-bs-toggle="dropdown" aria-expanded="false" th:if="${#locale.getLanguage()} == 'en'">
+                        <span class="flag-icon flag-icon-gb pe-1"></span> EN
+                    </button>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                        <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-ru pe-1"></span> Русский</a></li>
-                        <li><a class="dropdown-item" href="#"><span class="flag-icon flag-icon-gb pe-1"></span> English</a></li>
+                        <li><a class="dropdown-item" href="?lang=ru"><span class="flag-icon flag-icon-ru pe-1"></span> Русский</a></li>
+                        <li><a class="dropdown-item" href="?lang=en"><span class="flag-icon flag-icon-gb pe-1"></span> English</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
