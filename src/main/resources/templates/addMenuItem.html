@@ -11,7 +11,7 @@
                 <img class="d-block mx-auto mb-4" src="/images/logo_green.svg" width="300">
                 <h3 class="py-3 text-center" th:text="#{title.additem}"></h3>
             </div>
-            <form action="/addItem" class="needs-validation" novalidate="" method="post">
+            <form action="/addMenuItem" class="needs-validation" novalidate="" method="post">
                 <input type="hidden" name="dishId" th:unless="${dish == null}" th:value="${dish.getId()}">
                 <div class="row">
                     <div class="col-md-6 mb-3">
