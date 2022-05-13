@@ -17,4 +17,13 @@ public class DishDAOImpl implements DishDAO{
         Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.get(Dish.class, id);
     }
+
+    @Override
+    public void deleteDish(Long id) {
+        Dish dish = getDish(id);
+        dish.setCategory(null);
+
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.update(dish);
+    }
 }

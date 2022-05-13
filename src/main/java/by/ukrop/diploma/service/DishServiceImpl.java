@@ -15,6 +15,18 @@ public class DishServiceImpl implements DishService{
     @Override
     @Transactional
     public Dish getDish(Long id) {
-        return dishDAO.getDish(id);
+        Dish dish = dishDAO.getDish(id);
+        if (dish != null && dish.getCategory() == null) {
+            return null;
+        }
+        return dish;
     }
+
+    @Override
+    @Transactional
+    public void deleteDish(Long id) {
+        dishDAO.deleteDish(id);
+    }
+
+
 }

@@ -35,6 +35,15 @@ public class MenuController extends SuperController{
         return "menu";
     }
 
+    @PostMapping("/deleteMenuItem")
+    public RedirectView deleteMenuItem (@RequestParam(value = "dishId") Long dishId) {
+        Dish dish = dishService.getDish(dishId);
+        String anchor = dish.getCategory().getAnchorName();
+
+        dishService.deleteDish(dishId);
+        return new RedirectView("/menu#"+anchor);
+    }
+
     @GetMapping("/addMenuItem")
     public String addMenuItem(@RequestParam(required = false) Long dishId, HttpServletRequest request, HttpServletResponse httpResponse, Model model) throws IOException {
         if (model.getAttribute("currentUser") == null){
