@@ -18,4 +18,10 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Category> getCategories() {
         return categoryDAO.getCategories();
     }
+
+    @Override
+    @Transactional
+    public Category getCategory(Long id) {
+        return categoryDAO.getCategory(id);
+    }
 }

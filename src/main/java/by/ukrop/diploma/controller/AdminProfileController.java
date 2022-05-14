@@ -36,7 +36,7 @@ public class AdminProfileController extends SuperController{
     }
 
     @PostMapping("/changeUser")
-    public String chnageUser(@RequestParam(value = "firstName") String firstName,
+    public String changeUser(@RequestParam(value = "firstName") String firstName,
                           @RequestParam(value = "lastName") String lastName,
                           @RequestParam(value = "phoneNumber") String phoneNumber,
                           @RequestParam(value = "roleId") Long roleId,

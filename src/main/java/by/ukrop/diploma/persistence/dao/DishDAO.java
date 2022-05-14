@@ -6,4 +6,8 @@ public interface DishDAO {
     Dish getDish (Long id);
 
     void deleteDish(Long id);
+
+    Long addDish(Dish dish);
+
+    void updateDish(Dish dish);
 }

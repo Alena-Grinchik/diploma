@@ -45,7 +45,7 @@ public class MenuController extends SuperController{
     }
 
     @GetMapping("/addMenuItem")
-    public String addMenuItem(@RequestParam(required = false) Long dishId, HttpServletRequest request, HttpServletResponse httpResponse, Model model) throws IOException {
+    public String addMenuItem(@RequestParam(required = false) Long dishId, HttpServletResponse httpResponse, Model model) throws IOException {
         if (model.getAttribute("currentUser") == null){
             httpResponse.sendRedirect("/signIn");
             return null;
@@ -57,6 +57,38 @@ public class MenuController extends SuperController{
         }
 
         return "addMenuItem";
+    }
+
+    @PostMapping("/addMenuItem")
+    public String addMenuItem(@RequestParam(required = false) Long dishId, @RequestParam String dishNameEng, @RequestParam String dishDescriptionEng,
+                              @RequestParam String dishName, @RequestParam String dishDescription, @RequestParam String dishUrl, @RequestParam Long dishCategory,
+                              @RequestParam Double dishPrice,HttpServletResponse httpResponse, Model model) throws IOException {
+        Dish dish;
+        Long savedDishId;
+
+        if (dishId != null) {
+            dish = dishService.getDish(dishId);
+        } else {
+            dish = new Dish();
+        }
+
+        dish.setDescription(dishDescription);
+        dish.setImage(dishUrl);
+        dish.setDescriptionEng(dishDescriptionEng);
+        dish.setDescription(dishDescription);
+        dish.setName(dishName);
+        dish.setNameEng(dishNameEng);
+        dish.setPrice(dishPrice);
+        dish.setCategory(categoryService.getCategory(dishCategory));
+
+        if (dishId != null) {
+            dishService.updateDish(dish);
+            savedDishId=dishId;
+        } else {
+            savedDishId=dishService.addDish(dish);
+        }
+
+        return addMenuItem(savedDishId,httpResponse,model);
     }
 
     @PostMapping("/addItem")

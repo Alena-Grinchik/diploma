@@ -1,6 +1,7 @@
 package by.ukrop.diploma.persistence.dao;
 
 import by.ukrop.diploma.persistence.entity.Category;
+import by.ukrop.diploma.persistence.entity.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,11 @@ public class CategoryDAOImpl implements CategoryDAO{
         cq.select(root);
         Query query = session.createQuery(cq);
         return query.getResultList();
+    }
+
+    @Override
+    public Category getCategory(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        return currentSession.get(Category.class, id);
     }
 }

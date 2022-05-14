@@ -28,5 +28,16 @@ public class DishServiceImpl implements DishService{
         dishDAO.deleteDish(id);
     }
 
+    @Override
+    @Transactional
+    public Long addDish(Dish dish) {
+        return dishDAO.addDish(dish);
+    }
+
+    @Override
+    @Transactional
+    public void updateDish(Dish dish) {
+        dishDAO.updateDish(dish);
+    }
 
 }

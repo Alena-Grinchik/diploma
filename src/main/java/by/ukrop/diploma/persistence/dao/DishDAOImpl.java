@@ -26,4 +26,16 @@ public class DishDAOImpl implements DishDAO{
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.update(dish);
     }
+
+    @Override
+    public Long addDish(Dish dish) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        return (Long) currentSession.save(dish);
+    }
+
+    @Override
+    public void updateDish(Dish dish) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.update(dish);
+    }
 }
