@@ -40,7 +40,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/mngProfile").hasRole("MANAGER")
+                .antMatchers("/mngProfile", "/orderVerify", "/orderDeliver").hasRole("MANAGER")
                 .antMatchers("/adminProfile", "/changeUser", "/addMenuItem", "/deleteMenuItem").hasRole("ADMIN")
                 .antMatchers("/**").permitAll()
                 .and().formLogin().loginPage("/signIn").defaultSuccessUrl("/").permitAll()

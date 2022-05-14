@@ -100,10 +100,12 @@
                                                     <hr class="mb-4">
                                                     <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit" th:text="#{buttons.save}"></button>
                                                 </form>
-                                                <form class="d-inline">
+                                                <form class="d-inline" action="/orderVerify" method="post" th:if="${order.getStatus().name() == 'SUBMITTED'}" >
+                                                    <input type="hidden" name="orderId" th:value="${order.getId()}">
                                                     <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit" th:text="#{buttons.verify}"></button>
                                                 </form>
-                                                <form class="d-inline">
+                                                <form class="d-inline" action="/orderDeliver" method="post" th:if="${order.getStatus().name() == 'APPROVED'}">
+                                                    <input type="hidden" name="orderId" th:value="${order.getId()}">
                                                     <button class="btn btn-primary shadow btn-lg btn-block d-inline" type="submit" th:text="#{buttons.deliver}"></button>
                                                 </form>
                                             </div>
