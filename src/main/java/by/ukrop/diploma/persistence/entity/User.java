@@ -1,6 +1,5 @@
 package by.ukrop.diploma.persistence.entity;
 
-
 import by.ukrop.diploma.service.OrderStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

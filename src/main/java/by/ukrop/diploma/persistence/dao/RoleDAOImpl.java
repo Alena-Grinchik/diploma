@@ -1,6 +1,5 @@
 package by.ukrop.diploma.persistence.dao;
 
-import by.ukrop.diploma.persistence.entity.Dish;
 import by.ukrop.diploma.persistence.entity.Role;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
