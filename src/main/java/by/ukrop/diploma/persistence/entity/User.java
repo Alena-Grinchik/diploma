@@ -1,6 +1,8 @@
 package by.ukrop.diploma.persistence.entity;
 
 import by.ukrop.diploma.service.OrderStatus;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -42,6 +44,7 @@ public class User implements UserDetails {
     private Discount discount;
 
     @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List <Order> ordersList;
 
     public User() {
@@ -183,8 +186,7 @@ public class User implements UserDetails {
         return role.getName().equals("ROLE_USER");
     }
 
-    public Discount applicableDiscount(){
-        Discount discount = new Discount();
+    public Long applicableDiscountId(){
         int completedOrders = 0;
         for (Order order: ordersList) {
             if (order.getStatus()== OrderStatus.DELIVERED){
@@ -193,14 +195,13 @@ public class User implements UserDetails {
         }
 
         if (isManager()){
-            discount.setId(4L);
+            return 4L;
         }else if (completedOrders < 5){
-            discount.setId(1L);
+            return 1L;
         } else if (completedOrders < 10){
-            discount.setId(2L);
+            return 2L;
         } else {
-            discount.setId(3L);
+            return 3L;
         }
-        return discount;
     }
 }

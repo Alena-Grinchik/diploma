@@ -32,9 +32,17 @@
                                 </div>
                                 <span class="text-muted col-md-4 align-middle" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between row">
+                            <li class="list-group-item d-flex justify-content-between row" th:if="${currentUser != null}">
                                 <span class="col-md-8" th:text="#{checkout.total}"></span>
                                 <strong class="col-md-4" th:text="${#numbers.formatDecimal(currentOrder.orderTotal(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between row" th:if="${currentUser != null}">
+                                <span class="col-md-8" th:text="#{profile.discount}"></span>
+                                <strong class="col-md-4 text-danger" th:text="'-'+${#numbers.formatDecimal(currentOrder.orderTotal()*currentUser.getDiscount().getValue()/100, 1, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between row">
+                                <span class="col-md-8" th:text="#{checkout.grandtotal}"></span>
+                                <strong class="col-md-4" th:text="${#numbers.formatDecimal(currentOrder.orderTotal()-currentOrder.orderTotal()*(currentUser != null ? currentUser.getDiscount().getValue() : 0)/100, 1, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></strong>
                             </li>
                         </ul>
                     </div>

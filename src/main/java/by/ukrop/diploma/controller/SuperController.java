@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 /*https://stackoverflow.com/questions/7360784/add-attributes-to-the-model-of-all-controllers-in-spring-3/21233819#21233819*/
 
 @Controller
@@ -25,11 +26,15 @@ public class SuperController {
 
     @Autowired
     protected OrderService orderService;
+
     @Autowired
     protected OrderItemService orderItemService;
 
     @Autowired
     protected AddressService addressService;
+
+    @Autowired
+    protected DiscountService discountService;
 
     @ModelAttribute("categories")
     public List<Category> getCategories() {
@@ -57,6 +62,13 @@ public class SuperController {
         if (authentication != null) {
             User userAuth = (User) authentication.getPrincipal();
             User user = userService.getUser(userAuth.getId());
+            if (!Objects.equals(user.getDiscount().getId(), user.applicableDiscountId())){
+                user.setDiscount(discountService.getDiscount(user.applicableDiscountId()));
+                userService.updateUser(user);
+            }
+            System.out.println("--------------------------------------------------------------------------------");
+            System.out.println(user.getOrdersList().size());
+            System.out.println("--------------------------------------------------------------------------------");
             HttpSession session = request.getSession(true);
             Long currentCartId = (Long) session.getAttribute("CurrentCart");
 
