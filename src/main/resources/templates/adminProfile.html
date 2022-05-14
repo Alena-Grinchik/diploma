@@ -17,6 +17,11 @@
                     <div class="pt-1 pb-2 text-center">
                         <h3 th:text="#{admin.list.title}"></h3>
                     </div>
+                    <ul class="list-unstyled pb-4">
+                        <li th:each="error : ${errors}">
+                            <span class="text-danger fw-bold" th:text="${error}"></span>
+                        </li>
+                    </ul>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item" th:each="user, iterStat : ${allUsers}">
                             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
