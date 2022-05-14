@@ -1,7 +1,5 @@
 package by.ukrop.diploma.controller;
 
-import by.ukrop.diploma.service.OrderItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +12,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class CartController extends SuperController{
-
-    @Autowired
-    private OrderItemService orderItemService;
 
     @GetMapping("/cart")
     public String menu(Model model, HttpServletRequest request) {

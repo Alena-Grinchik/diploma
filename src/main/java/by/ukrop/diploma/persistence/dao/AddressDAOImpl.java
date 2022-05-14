@@ -38,4 +38,9 @@ public class AddressDAOImpl implements AddressDAO{
         return query.getResultList().stream().findFirst().orElse(null);
     }
 
+    @Override
+    public void updateAddress(Address address) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.update(address);
+    }
 }

@@ -4,10 +4,8 @@ import by.ukrop.diploma.Translator;
 import by.ukrop.diploma.persistence.entity.Address;
 import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.User;
-import by.ukrop.diploma.service.AddressService;
 import by.ukrop.diploma.service.OrderStatus;
 import by.ukrop.diploma.service.PaymentMethod;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +23,6 @@ import java.util.regex.Pattern;
 
 @Controller
 public class CheckOutController extends SuperController{
-
-    @Autowired
-    private AddressService addressService;
 
     @GetMapping("/checkOut")
     public String checkOut(HttpServletRequest request, HttpServletResponse httpResponse, Model model) throws IOException {

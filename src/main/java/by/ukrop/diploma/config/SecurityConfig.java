@@ -1,6 +1,5 @@
 package by.ukrop.diploma.config;
 
-
 import by.ukrop.diploma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 @Configuration
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
@@ -40,7 +38,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/mngProfile", "/orderVerify", "/orderDeliver").hasRole("MANAGER")
+                .antMatchers("/mngProfile", "/orderVerify", "/orderDeliver", "/mngRemoveItem", "/mngUpdateQuantity", "/mngUpdateDetails").hasRole("MANAGER")
                 .antMatchers("/adminProfile", "/changeUser", "/addMenuItem", "/deleteMenuItem").hasRole("ADMIN")
                 .antMatchers("/**").permitAll()
                 .and().formLogin().loginPage("/signIn").defaultSuccessUrl("/").permitAll()

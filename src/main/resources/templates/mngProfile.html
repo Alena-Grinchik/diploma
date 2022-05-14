@@ -35,7 +35,8 @@
                                         <div class="card-body p-4 pb-0">
                                             <div class="col-md-8 order-md-1">
                                                 <h4 class="mb-3" th:text="#{forms.contacts.title}"></h4>
-                                                <form class="needs-validation d-inline" method="post" action="/checkOut" novalidate="">
+                                                <form class="needs-validation d-inline" method="post" action="/mngUpdateDetails" novalidate="">
+                                                    <input type="hidden" name="orderId" th:value="${order.getId()}">
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label for="firstName" th:text="#{forms.firstname.label}"></label>
@@ -99,7 +100,7 @@
                                                     <hr class="mb-4">
                                                     <h4 class="mb-3" th:text="#{forms.comment.title}"></h4>
                                                     <div class="form-floating">
-                                                        <textarea class="form-control" th:value="${order.getOrderComment()}" id="orderComment" name="orderComment" style="height: 100px"></textarea>
+                                                        <textarea class="form-control" th:text="${order.getOrderComment()}" id="orderComment" name="orderComment" style="height: 100px"></textarea>
                                                         <label for="orderComment" th:text="#{forms.comment.label}"></label>
                                                     </div>
                                                     <hr class="mb-4">
@@ -164,7 +165,7 @@
                                                 </div>
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div class="d-flex flex-row">
-                                                        <form class="updateOrderItemQuantityForm" action="/updateQuantity" method="post">
+                                                        <form class="updateOrderItemQuantityForm" action="/mngUpdateQuantity" method="post">
                                                             <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
                                                             <input type="hidden" name="delta" value="-1">
                                                             <button class="btn btn-link px-2">
@@ -172,7 +173,7 @@
                                                             </button>
                                                         </form>
                                                         <p class="lead fw-normal mb-0 px-2" th:text="${orderItem.getQuantity()}"></p>
-                                                        <form class="updateOrderItemQuantityForm" action="/updateQuantity" method="post">
+                                                        <form class="updateOrderItemQuantityForm" action="/mngUpdateQuantity" method="post">
                                                             <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
                                                             <input type="hidden" name="delta" value="1">
                                                             <button class="btn btn-link px-2">
@@ -189,7 +190,7 @@
                                                 <div class="col-md-2 d-flex justify-content-center">
                                                     <div>
                                                         <span class="lead fw-normal mb-0" th:text="${#numbers.formatDecimal(orderItem.getDish().getPrice()*orderItem.getQuantity(), 0, 'COMMA', 2, 'POINT')} + ' ' + #{general.rub}"></span>
-                                                        <form class="removeItemForm" action="/removeItem" method="post">
+                                                        <form class="removeItemForm" action="/mngRemoveItem" method="post">
                                                             <input type="hidden" name="orderItemId" th:value="${orderItem.id}">
                                                             <button class="btn btn-link px-2 ms-1 float-end trash-icon">
                                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>

@@ -3,9 +3,7 @@ package by.ukrop.diploma.controller;
 import by.ukrop.diploma.persistence.entity.Category;
 import by.ukrop.diploma.persistence.entity.Order;
 import by.ukrop.diploma.persistence.entity.User;
-import by.ukrop.diploma.service.CategoryService;
-import by.ukrop.diploma.service.OrderService;
-import by.ukrop.diploma.service.UserService;
+import by.ukrop.diploma.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.security.Principal;
 import java.util.List;
 /*https://stackoverflow.com/questions/7360784/add-attributes-to-the-model-of-all-controllers-in-spring-3/21233819#21233819*/
 
@@ -28,6 +25,11 @@ public class SuperController {
 
     @Autowired
     protected OrderService orderService;
+    @Autowired
+    protected OrderItemService orderItemService;
+
+    @Autowired
+    protected AddressService addressService;
 
     @ModelAttribute("categories")
     public List<Category> getCategories() {

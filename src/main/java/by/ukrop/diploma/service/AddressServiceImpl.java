@@ -24,4 +24,10 @@ public class AddressServiceImpl implements AddressService{
     public Address getLastUserAddress(User user) {
         return addressDAO.getLastUserAddress(user);
     }
+
+    @Override
+    @Transactional
+    public void updateAddress(Address address) {
+        addressDAO.updateAddress(address);
+    }
 }

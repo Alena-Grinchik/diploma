@@ -7,4 +7,6 @@ public interface AddressService {
     Long addAddress(Address address);
 
     Address getLastUserAddress(User user);
+
+    void updateAddress(Address address);
 }
