@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url('/images/background.jpg') no-repeat center center fixed;
+    background: url('/images/background.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -16,6 +16,28 @@ nav{
     background: rgb(132,167,49);
     background: radial-gradient(circle, rgba(132,167,49,1) 22%, rgba(95,116,48,1) 69%);
     color: ghostwhite;
+}
+
+.index-1 {
+    display: block;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.index-background-1 {
+    background-image: url('/images/background.jpg');
+    background-position: center center;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.index-logo-1 {
+    z-index: 10;
 }
 
 .sticky-offset{
