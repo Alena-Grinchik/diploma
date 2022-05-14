@@ -49,7 +49,7 @@
                     <div class="col-md-2 mb-3">
                         <label for="dishCategory" th:text="#{forms.dish.category.label}"></label>
                         <select class="form-select" id="dishCategory" name="dishCategory">
-                            <option th:each="category : ${categories}" th:text="${category.getName()}" th:value="${category.getId()}"></option>
+                            <option th:each="category : ${categories}" th:text="${category.getLocalizedName()}" th:value="${category.getId()}"></option>
                         </select>
                     </div>
                 </div>

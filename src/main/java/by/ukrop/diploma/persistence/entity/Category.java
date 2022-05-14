@@ -1,7 +1,10 @@
 package by.ukrop.diploma.persistence.entity;
 
+import org.springframework.context.i18n.LocaleContextHolder;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +17,9 @@ public class Category {
 
     @Column
     private String name;
+
+    @Column
+    private String nameEng;
 
     @OneToMany(mappedBy = "category", fetch=FetchType.EAGER)
     private List<Dish> dishesList;
@@ -44,20 +50,37 @@ public class Category {
         this.dishesList = dishesList;
     }
 
+    public String getNameEng() {
+        return nameEng;
+    }
+
+    public void setNameEng(String nameEng) {
+        this.nameEng = nameEng;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return id == category.id && Objects.equals(name, category.name);
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(nameEng, category.nameEng) && Objects.equals(dishesList, category.dishesList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, nameEng, dishesList);
     }
 
     public String getAnchorName(){
         return "category-"+this.getId();
+    }
+
+    public String getLocalizedName(){
+        Locale locale = LocaleContextHolder.getLocale();
+        if(locale.getLanguage().equals("en")){
+            return nameEng;
+        } else {
+            return name;
+        }
     }
 }
