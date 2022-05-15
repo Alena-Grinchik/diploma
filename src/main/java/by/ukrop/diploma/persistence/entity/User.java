@@ -58,11 +58,6 @@ public class User implements UserDetails {
         return id;
     }
 
-    /*no idea how to fix it*/
-  /*  public void setId(Long id) {
-        this.id = id;
-    }*/
-
     public String getFirstName() {
         return firstName;
     }
