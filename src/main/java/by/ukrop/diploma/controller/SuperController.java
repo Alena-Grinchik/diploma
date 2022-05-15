@@ -66,9 +66,6 @@ public class SuperController {
                 user.setDiscount(discountService.getDiscount(user.applicableDiscountId()));
                 userService.updateUser(user);
             }
-            System.out.println("--------------------------------------------------------------------------------");
-            System.out.println(user.getOrdersList().size());
-            System.out.println("--------------------------------------------------------------------------------");
             HttpSession session = request.getSession(true);
             Long currentCartId = (Long) session.getAttribute("CurrentCart");
 
