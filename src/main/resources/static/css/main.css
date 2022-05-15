@@ -26,6 +26,22 @@ nav{
     min-height: 100vh;
 }
 
+.index-2 {
+    display: block;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 50vh;
+}
+
+.index-3 {
+    display: block;
+    height: 600px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 50vh;
+}
+
 .index-background-1 {
     background-image: url('/images/background.jpg');
     background-position: center center;
@@ -34,6 +50,18 @@ nav{
     left: 0;
     bottom: 0;
     right: 0;
+    z-index: -1;
+}
+
+.index-background-2 {
+    background-image: url('/images/background2.jpg');
+    background-position: center center;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
 }
 
 .index-logo-1 {
