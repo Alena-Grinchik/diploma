@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="dishPrice" th:text="#{forms.dish.price.label}"></label>
-                        <input type="text" class="form-control" id="dishPrice" name="dishPrice" placeholder="" th:value="${dish == null}? '' : ${dish.getPrice()}" required="" pattern="^\d+(\.\d{2})?$">
+                        <input type="text" class="form-control" id="dishPrice" name="dishPrice" placeholder="" th:value="${dish == null}? '' : ${#numbers.formatDecimal(dish.getPrice(), 1, 'COMMA', 2, 'POINT')}" required="" pattern="^\d+(\.\d{2})?$">
                         <div class="invalid-feedback" th:text="#{forms.dish.price.error}"></div>
                     </div>
                     <div class="col-md-2 mb-3">
